@@ -8,8 +8,8 @@ function Header() {
     <header className='header'>
       <img src={logo} alt='Логотип' className='header__logo' />
       <nav className='header__nav'>
-        <button className='header__button'></button>
-        <button className='header__button'></button>
+        <button className='header__button'>Фильмы</button>
+        <button className='header__button'>Сохранённые фильмы</button>
         <div className='header__box'>
           <button className='header__button'></button>
         </div>

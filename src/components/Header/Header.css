@@ -13,6 +13,11 @@
 .header__nav {
 }
 .header__button {
+  font-family: 'Suisse Intl';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
 }
 .header__box {
 }
