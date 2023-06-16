@@ -12,13 +12,20 @@ import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 
 function App() {
-  const endpoints = ['/', '/movies', '/saved-movies', '/profile'];
+  const endpoints = [
+    '/',
+    '/movies',
+    '/saved-movies',
+    '/profile',
+    '/sign-in',
+    '/sign-up',
+  ];
 
   return (
     <div className='App'>
       <Routes>
         {endpoints.map((path, i) => (
-          <Route path={path} element={<Header />} key={i} />
+          <Route path={path} element={<Header loggedIn={false} />} key={i} />
         ))}
       </Routes>
 

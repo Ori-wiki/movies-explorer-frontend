@@ -7,7 +7,13 @@ import './Profile.css';
 // const endpoints = ['/movies', '/saved-movies', '/profile', '/'];
 
 function Profile() {
-  return <>zxc</>;
+  return (
+    <h2>
+      Учебный проект студента
+      <br />
+      факультета Веб-разработки
+    </h2>
+  );
 }
 
 export default Profile;
