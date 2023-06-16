@@ -3,13 +3,13 @@ import './Promo.css';
 
 function Promo() {
   return (
-    <div className='promo'>
+    <section className='promo'>
       <h2 className='promo__title'>
         Учебный проект студента
         <br />
-        факультета Веб-разработки
+        факультета Веб-разработки.
       </h2>
-    </div>
+    </section>
   );
 }
 
