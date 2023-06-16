@@ -1,0 +1,43 @@
+.footer {
+  width: 100%;
+  max-width: 1280px;
+  padding: 0 70px 20px;
+}
+.footer__title {
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: center;
+  color: #a0a0a0;
+  margin-bottom: 20px;
+}
+.footer__container {
+  width: 100%;
+  border-top: 1px solid #e8e8e8;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+.footer__author {
+  font-family: Inter;
+}
+.footer__list {
+  list-style: none;
+  display: flex;
+}
+
+.footer__list-item:not(:last-child) {
+  margin-right: 20px;
+}
+.footer__list-link {
+  text-decoration: none;
+  color: #000000;
+}
+.footer__list-link:hover {
+  opacity: 0.7;
+}
