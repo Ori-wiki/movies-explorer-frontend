@@ -1,0 +1,63 @@
+.student {
+  padding: 110px 70px 125px;
+}
+.student__info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 66px;
+}
+.student__info-container {
+  max-width: 600px;
+}
+.student__title {
+  font-family: Inter;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  margin-bottom: 18px;
+}
+.student__profession {
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  margin-bottom: 26px;
+}
+.student__bio {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.student__list {
+  margin-top: 45px;
+}
+.student__list-item {
+  list-style: none;
+}
+.student__list-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+.student__link {
+  text-decoration: none;
+  text-align: center;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  max-width: 150px;
+}
+.student__photo {
+  height: 327px;
+  width: 270px;
+  border-radius: 10px;
+}
+.student__list-text {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  color: #000000;
+}
