@@ -1,0 +1,14 @@
+.portfolio {
+  padding: 100px 70px 125px;
+}
+.portofolio__title {
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #a0a0a0;
+  margin-bottom: 50px;
+}
+.portfolio__list {
+  position: relative;
+}

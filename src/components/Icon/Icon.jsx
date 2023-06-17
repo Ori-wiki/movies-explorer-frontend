@@ -13,8 +13,3 @@ function Icon({ iconLink }) {
 }
 
 export default Icon;
-
-// style={{
-//   backgroundImage: 'url(' + require(zxc) + ')',
-// }}
-// `'url${iconLink}'`;
