@@ -25,7 +25,7 @@ function App() {
     <div className='App'>
       <Routes>
         {endpoints.map((path, i) => (
-          <Route path={path} element={<Header loggedIn={false} />} key={i} />
+          <Route path={path} element={<Header loggedIn={true} />} key={i} />
         ))}
       </Routes>
 
