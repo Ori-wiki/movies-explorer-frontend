@@ -1,7 +1,7 @@
 import React from 'react';
 import './SectionTitle.css';
 
-function SectionTitle({ id, text }) {
+function SectionTitle({ id = '', text }) {
   return (
     <h2 id={id} className='section-title'>
       {text}
