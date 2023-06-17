@@ -1,0 +1,34 @@
+.search-form {
+  padding: 70px 70px 48px;
+}
+.search-form__conntainer {
+  display: flex;
+  border-bottom: 1px solid rgba(232, 232, 232, 1);
+}
+.search-form__input {
+  font-family: Inter;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 34px;
+  color: rgba(160, 160, 160, 1);
+  width: 100%;
+  border: none;
+  padding-bottom: 13px;
+  outline: none;
+}
+.search-form__button-submit {
+  background-image: url('../../images/search-form-icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(52, 86, 243, 1);
+  border-radius: 48px;
+  border: none;
+  width: 34px;
+  height: 34px;
+}
+.search-form__box {
+}
+.search-form__checkbox {
+}
+.seacrh-form__label {
+}
