@@ -1,7 +1,6 @@
 .tech {
   background-color: #e8e8e8;
   border-radius: 10px;
-  text-decoration: none;
   width: 90px;
   height: 60px;
   display: block;
@@ -17,6 +16,7 @@
   line-height: 17px;
   letter-spacing: -0.04em;
   text-align: center;
+  text-decoration: none;
   color: #000000;
   position: absolute;
   top: 50%;
