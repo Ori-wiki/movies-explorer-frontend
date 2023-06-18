@@ -2,13 +2,15 @@ import React from 'react';
 
 import './MoviesCard.css';
 
+import { transformTime } from '../../utils/utils';
+
 function MoviesCard({ movie, savedMoviesPage = false, saved = false }) {
   console.log(movie);
 
   return (
     <div className='movies-card'>
-      <h4 className='movies-card__title'>В погоне за Бенкси</h4>
-      <span className='movies-card__time'>27 минут</span>
+      <h4 className='movies-card__title'>{movie.name}</h4>
+      <span className='movies-card__time'>{transformTime(movie.duration)}</span>
       <img className='movies-card__img' alt='фильм' src={movie.image} />
       {savedMoviesPage ? (
         <button className='movies-card__button movies-card__button-delete'></button>

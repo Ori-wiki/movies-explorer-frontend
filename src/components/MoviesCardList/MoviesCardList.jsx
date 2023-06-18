@@ -7,14 +7,16 @@ import imageMovies from '../../images/movies/pic__COLOR_pic.jpg';
 function MoviesCardList() {
   const movie = {
     image: imageMovies,
+    name: 'В погоне за Бенксиыфвфвфывфывфывфывфывфвфы фывфывыф',
+    duration: 123,
   };
 
   return (
     <section className='movies__card-list'>
-      <MoviesCard movie={movie} saved={true} />
-      <MoviesCard movie={movie} saved={false} />
-      <MoviesCard movie={movie} saved={true} />
-      <MoviesCard movie={movie} saved={false} />
+      <MoviesCard movie={movie} saved={true} savedMoviesPage={false} />
+      <MoviesCard movie={movie} saved={false} savedMoviesPage={false} />
+      <MoviesCard movie={movie} saved={true} savedMoviesPage={false} />
+      <MoviesCard movie={movie} saved={false} savedMoviesPage={false} />
     </section>
   );
 }
