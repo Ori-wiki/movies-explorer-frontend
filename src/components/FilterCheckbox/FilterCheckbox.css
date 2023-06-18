@@ -1,0 +1,61 @@
+.search-form__block {
+  margin-top: 32px;
+}
+.seacrh-form__label {
+  padding-left: 50px;
+}
+.search-form__checkbox {
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.searh-from__box {
+  margin-left: -50px;
+  position: absolute;
+  width: 36px;
+  height: 20px;
+  border-radius: 36px;
+  background-color: rgba(52, 52, 52, 1);
+  cursor: pointer;
+  transition: all 0.5s linear;
+}
+.searh-from__box:hover {
+  filter: brightness(1.2);
+}
+.searh-from__box::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: rgba(160, 160, 160, 1);
+  border-radius: 50%;
+  transition: left 0.3s linear;
+}
+
+/* Cheked */
+
+.search-form__checkbox:checked + .searh-from__box {
+  background-color: rgba(43, 224, 128, 1);
+}
+.search-form__checkbox:checked + .searh-from__box:hover {
+  filter: brightness(0.9);
+}
+.search-form__checkbox:checked + .searh-from__box::before {
+  background-color: rgba(255, 255, 255, 1);
+  left: 18px;
+  transition: left 0.3s linear;
+}
+
+/* Focused */
+
+.search-form__checkbox:focus-visible + .searh-from__box {
+  box-shadow: 0 0 0 2px rgba(43, 224, 128, 1), 0 0 0 2px rgba(43, 224, 128, 1);
+  transition: box-shadow 0s;
+}
+.search-form__checkbox:checked:focus-visible + .searh-from__box {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 1), 0 0 0 2px rgba(0, 0, 0, 1);
+  transition: box-shadow 0s;
+}
