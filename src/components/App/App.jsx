@@ -10,6 +10,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
+import Error from '../Error/Error';
 
 function App() {
   const headerEndpoints = ['/', '/movies', '/saved-movies', '/profile'];
@@ -34,6 +35,10 @@ function App() {
         <Route path='/movies' element={<Movies />} />
         <Route path='/saved-movies' element={<SavedMovies />} />
         <Route path='/profile' element={<Profile user={user} />} />
+        <Route
+          path='/*'
+          element={<Error message='Страница не найдена' status='404' />}
+        />
       </Routes>
       <Routes>
         {footerEndpoints.map((path, i) => (
