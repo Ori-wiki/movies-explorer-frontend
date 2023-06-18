@@ -7,7 +7,7 @@ import imageMovies from '../../images/movies/pic__COLOR_pic.jpg';
 function MoviesCardList() {
   const movie = {
     image: imageMovies,
-    name: 'В погоне за Бенксиыфвфвфывфывфывфывфывфвфы фывфывыф',
+    name: 'В погоне за Бенкси',
     duration: 123,
   };
 

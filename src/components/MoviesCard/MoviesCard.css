@@ -15,8 +15,9 @@
   font-size: 15px;
   font-weight: 500;
   line-height: 18px;
+  word-wrap: break-word;
   grid-area: title;
-  padding: 18px 0 18px 18px;
+  padding: 18px 4px 18px 18px;
 }
 .movies-card__time {
   font-family: Inter;
@@ -26,7 +27,7 @@
   text-align: right;
   color: rgba(160, 160, 160, 1);
   grid-area: time;
-  padding: 18px 18px 18px 0;
+  padding: 18px 18px 18px 4px;
 }
 
 .movies-card__img {
