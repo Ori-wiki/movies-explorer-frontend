@@ -4,7 +4,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import imageMovies from '../../images/movies/pic__COLOR_pic.jpg';
 
-function MoviesCardList() {
+function MoviesCardList({ savedMoviesPage = false }) {
   const movie = {
     image: imageMovies,
     name: 'В погоне за Бенкси',
@@ -13,10 +13,26 @@ function MoviesCardList() {
 
   return (
     <section className='movies__card-list'>
-      <MoviesCard movie={movie} saved={true} savedMoviesPage={false} />
-      <MoviesCard movie={movie} saved={false} savedMoviesPage={false} />
-      <MoviesCard movie={movie} saved={true} savedMoviesPage={false} />
-      <MoviesCard movie={movie} saved={false} savedMoviesPage={false} />
+      <MoviesCard
+        movie={movie}
+        saved={true}
+        savedMoviesPage={savedMoviesPage}
+      />
+      <MoviesCard
+        movie={movie}
+        saved={false}
+        savedMoviesPage={savedMoviesPage}
+      />
+      <MoviesCard
+        movie={movie}
+        saved={true}
+        savedMoviesPage={savedMoviesPage}
+      />
+      <MoviesCard
+        movie={movie}
+        saved={false}
+        savedMoviesPage={savedMoviesPage}
+      />
     </section>
   );
 }

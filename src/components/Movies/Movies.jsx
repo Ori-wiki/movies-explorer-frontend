@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Movies.css';
 
 import SearchForm from '../SearchForm/SearchForm';
@@ -6,7 +6,8 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
 function Movies() {
-  const [isDataLoading, setIsDataLoading] = useState(false);
+  // const [isDataLoading, setIsDataLoading] = useState(false);
+  const isDataLoading = false;
 
   return (
     <section className='movies'>

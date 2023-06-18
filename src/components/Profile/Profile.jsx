@@ -1,18 +1,48 @@
 import React from 'react';
-import logo from '../../images/logo.svg';
-// import accaountIcon from '../../images/icon__COLOR_icon-main.svg';
-import { Link, NavLink, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Profile.css';
 
-// const endpoints = ['/movies', '/saved-movies', '/profile', '/'];
-
-function Profile() {
+function Profile({ user }) {
   return (
-    <h2>
-      Учебный проект студента
-      <br />
-      факультета Веб-разработки
-    </h2>
+    <section className='profile'>
+      <h2 className='profile__title'>Привет, {user.name}!</h2>
+      <form className='profile__form'>
+        <label className='profile__label'>
+          Имя
+          <input
+            required
+            name='name'
+            id='name-input'
+            placeholder='Имя'
+            minLength={2}
+            maxLength={40}
+            type='text'
+            className='profile__input'
+          />
+          <span className='profile__input-error'></span>
+        </label>
+        <label className='profile__label'>
+          E-mail
+          <input
+            required
+            name='email'
+            id='email-input'
+            placeholder='E-mail'
+            minLength={2}
+            maxLength={40}
+            type='email'
+            className='profile__input'
+          />
+          <span className='profile__input-error'></span>
+        </label>
+        <button className='profile__button profile__button_edit'>
+          Редактировать
+        </button>
+      </form>
+      <Link to='/' className='profile__button profile__button_log-out'>
+        Выйти из аккаунта
+      </Link>
+    </section>
   );
 }
 

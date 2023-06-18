@@ -4,8 +4,9 @@
   min-height: 100vh;
   width: 100%;
   display: flex;
-  align-items: center;
+  justify-content: space-between;
   flex-direction: column;
+  align-items: center;
   position: relative;
   font-family: 'Inter', Arial, sans-serif;
   -moz-osx-font-smoothing: grayscale;

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
 import Header from '../Header/Header';
@@ -12,19 +12,17 @@ import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 
 function App() {
-  const endpoints = [
-    '/',
-    '/movies',
-    '/saved-movies',
-    '/profile',
-    '/sign-in',
-    '/sign-up',
-  ];
+  const headerEndpoints = ['/', '/movies', '/saved-movies', '/profile'];
+  const footerEndpoints = ['/', '/movies', '/saved-movies'];
+
+  const user = {
+    name: 'Денис',
+  };
 
   return (
     <div className='App'>
       <Routes>
-        {endpoints.map((path, i) => (
+        {headerEndpoints.map((path, i) => (
           <Route path={path} element={<Header loggedIn={true} />} key={i} />
         ))}
       </Routes>
@@ -32,13 +30,13 @@ function App() {
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/sign-in' element={<Login />} />
-        <Route path='/sign-in' element={<Register />} />
+        <Route path='/sign-up' element={<Register />} />
         <Route path='/movies' element={<Movies />} />
         <Route path='/saved-movies' element={<SavedMovies />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile' element={<Profile user={user} />} />
       </Routes>
       <Routes>
-        {endpoints.map((path, i) => (
+        {footerEndpoints.map((path, i) => (
           <Route path={path} element={<Footer />} key={i} />
         ))}
       </Routes>

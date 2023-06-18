@@ -1,15 +1,14 @@
 import React from 'react';
-import logo from '../../images/logo.svg';
+import { Link, NavLink } from 'react-router-dom';
 
-import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import './Header.css';
+
+import Logo from '../Logo/Logo';
 
 function Header({ loggedIn = false }) {
   return !loggedIn ? (
     <header className='header header_logout'>
-      <Link to='/'>
-        <img src={logo} alt='Логотип' className='header__logo' />
-      </Link>
+      <Logo />
       <nav className='header__nav'>
         <Link to='/sign-up' className={'header__link header__link_signup'}>
           Регистрация
@@ -22,7 +21,7 @@ function Header({ loggedIn = false }) {
   ) : (
     <header className='header'>
       <Link to='/'>
-        <img src={logo} alt='Логотип' className='header__logo' />
+        <Logo />
       </Link>
       <nav className='header__nav'>
         <NavLink
