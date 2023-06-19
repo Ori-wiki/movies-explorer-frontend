@@ -8,7 +8,9 @@
 
 @media screen and (max-width: 896px) {
   .movies__card-list {
+    padding: 70px 30px 30px;
     gap: 35px 24px;
+    grid-template-columns: repeat(auto-fit, minmax(342px, 1fr));
   }
 }
 @media screen and (max-width: 600px) {

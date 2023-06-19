@@ -39,8 +39,16 @@
 .portfolio__list-link:hover {
   opacity: 0.7;
   color: #2be080;
-  border-bottom: 2px solid #2be080;
+  border-bottom: 1px solid #2be080;
 }
 .portfolio__list-link:hover::after {
   background-image: url('../../images/arrow__project-link_green.svg');
+}
+@media screen and (max-width: 768px) {
+  .portfolio__list-link {
+    font-size: 28px;
+    padding-bottom: 19px;
+  }
+}
+@media screen and (max-width: 600px) {
 }

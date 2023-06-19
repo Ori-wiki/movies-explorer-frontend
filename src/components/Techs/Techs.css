@@ -26,8 +26,24 @@
   text-align: center;
 }
 .techs__container {
-  min-width: 600px;
+  width: 100%;
+  max-width: 690px;
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+}
+
+@media screen and (max-width: 830px) {
+  .techs {
+    padding: 90px 50px;
+  }
+  .tects__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .techs__container {
+    grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  }
+}
+@media screen and (max-width: 600px) {
 }

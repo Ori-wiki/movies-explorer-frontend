@@ -3,6 +3,10 @@
 }
 .seacrh-form__label {
   padding-left: 50px;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
 }
 .search-form__checkbox {
   position: absolute;
@@ -58,4 +62,14 @@
 .search-form__checkbox:checked:focus-visible + .searh-from__box {
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 1), 0 0 0 2px rgba(0, 0, 0, 1);
   transition: box-shadow 0s;
+}
+
+@media screen and (max-width: 768px) {
+  .search-form__block {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+@media screen and (max-width: 600px) {
 }

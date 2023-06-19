@@ -11,31 +11,33 @@
 }
 
 .error__status {
-  font-weight: 400;
+  font-family: Inter;
   font-size: 140px;
-  line-height: 170px;
+  font-weight: 400;
+  line-height: 169px;
 }
 
 .error__message {
   padding: 5px 0 174px;
-  font-weight: 400;
+  font-family: Inter;
   font-size: 16px;
-  line-height: 20px;
+  font-weight: 400;
+  line-height: 19px;
   text-align: center;
 }
 
 .error__link {
   padding: 5px;
+  font-family: Inter;
+  font-size: 14px;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  line-height: 17px;
   text-decoration: none;
-  color: rgba(66, 133, 244, 1);
-  transition: 0.2 all ease;
+  color: rgba(52, 86, 243, 1);
 }
 
 .error__link:hover {
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 425px) {

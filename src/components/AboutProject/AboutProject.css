@@ -6,8 +6,9 @@
   justify-content: space-between;
   padding-top: 70px;
 }
-/* .about__container-text {
-} */
+.about__container-text:first-child {
+  padding-right: 30px;
+}
 .about__title {
   font-family: Inter;
   font-size: 20px;
@@ -55,4 +56,19 @@
   line-height: 17px;
   padding-top: 14px;
   color: rgba(160, 160, 160, 1);
+}
+@media screen and (max-width: 768px) {
+  .about {
+    padding: 90px 50px;
+  }
+  .about__text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+  .about__progress {
+    padding-top: 93px;
+  }
+}
+@media screen and (max-width: 600px) {
 }

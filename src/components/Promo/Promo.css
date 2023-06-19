@@ -19,3 +19,12 @@
   text-align: center;
   color: #ffffff;
 }
+@media screen and (max-width: 768px) {
+  .promo {
+    padding: 326px 0 342px;
+  }
+}
+@media screen and (max-width: 600px) {
+  /* .promo {
+  } */
+}

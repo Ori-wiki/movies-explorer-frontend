@@ -1,5 +1,5 @@
 .portfolio {
-  padding: 100px 70px 125px;
+  padding: 0 70px 125px;
 }
 .portofolio__title {
   font-family: Inter;
@@ -11,4 +11,11 @@
 }
 .portfolio__list {
   position: relative;
+}
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 0 50px 90px;
+  }
+}
+@media screen and (max-width: 600px) {
 }

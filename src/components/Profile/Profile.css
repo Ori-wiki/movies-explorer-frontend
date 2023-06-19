@@ -48,6 +48,10 @@
   border: none;
   background-color: rgba(255, 255, 255, 1);
   cursor: pointer;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
 }
 .profile__button:hover {
   opacity: 0.7;
@@ -71,4 +75,14 @@
   min-height: 16px;
   font-family: Inter, Arial, sans-serif;
   transition: 0.3s;
+}
+@media screen and (max-width: 768px) {
+  .profile__title {
+    padding-bottom: 80px;
+  }
+  .profile__button_edit {
+    margin-top: 194px;
+  }
+}
+@media screen and (max-width: 600px) {
 }

@@ -68,3 +68,17 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 18px 30px;
+  }
+  .header__link:not(:last-child) {
+    margin-right: 30px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .header {
+    padding: 18px 30px;
+  }
+}
