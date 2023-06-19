@@ -17,5 +17,12 @@
     padding: 0 50px 90px;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 425px) {
+  .portfolio {
+    padding: 0 14px 70px;
+  }
+  .portofolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
 }

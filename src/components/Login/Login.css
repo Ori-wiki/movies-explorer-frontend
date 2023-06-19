@@ -76,8 +76,31 @@
   line-height: 12px;
   text-align: left;
   color: rgba(255, 48, 85, 1);
-  /* opacity: 0; */
+  opacity: 0;
   min-height: 16px;
   font-family: Inter, Arial, sans-serif;
   transition: 0.3s;
+}
+@media screen and (max-width: 425px) {
+  .login {
+    align-items: center;
+    width: 260px;
+  }
+  .login__button-submit {
+    width: 260px;
+    margin: 275px 0 16px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .login__title {
+    margin: 50px 0;
+  }
+  .login__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .login__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

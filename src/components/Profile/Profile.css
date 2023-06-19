@@ -81,8 +81,15 @@
     padding-bottom: 80px;
   }
   .profile__button_edit {
-    margin-top: 194px;
+    margin-top: 363px;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 425px) {
+  .profile__button {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .profile__form {
+    width: 260px;
+  }
 }

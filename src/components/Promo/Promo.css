@@ -24,7 +24,12 @@
     padding: 326px 0 342px;
   }
 }
-@media screen and (max-width: 600px) {
-  /* .promo {
-  } */
+@media screen and (max-width: 425px) {
+  .promo {
+    padding: 207px 0 246px;
+  }
+  .promo__title {
+    font-size: 31px;
+    line-height: 39px;
+  }
 }

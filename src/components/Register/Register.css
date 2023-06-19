@@ -1,10 +1,10 @@
 .register {
-  width: 100%;
   max-width: 1280px;
   margin: auto;
   display: flex;
   flex-direction: column;
   width: 396px;
+  padding-top: 10px;
 }
 .register__title {
   margin: 40px 0;
@@ -84,4 +84,28 @@
   min-height: 16px;
   font-family: Inter, Arial, sans-serif;
   transition: 0.3s;
+}
+
+@media screen and (max-width: 425px) {
+  .register {
+    align-items: center;
+    width: 260px;
+  }
+  .register__button-submit {
+    width: 260px;
+    margin: 222px 0 16px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .register__title {
+    margin: 50px 0;
+  }
+  .register__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .register__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

@@ -14,7 +14,7 @@ function SearchForm() {
           id='movies-input'
           placeholder='Фильм'
         />
-        <button className='search-form__button-submit'></button>
+        <button type='submit' className='search-form__button-submit'></button>
       </form>
       <FilterCheckbox />
     </section>
