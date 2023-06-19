@@ -1,5 +1,5 @@
 .promo {
-  background-color: #073042;
+  background-color: rgba(7, 48, 66, 1);
   background-image: url(../../images/promo__logo.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -17,7 +17,7 @@
   line-height: 58px;
   letter-spacing: -0.04em;
   text-align: center;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 1);
 }
 @media screen and (max-width: 768px) {
   .promo {

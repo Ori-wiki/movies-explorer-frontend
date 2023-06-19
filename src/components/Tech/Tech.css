@@ -10,7 +10,7 @@
   position: relative;
 }
 .tech__link:hover {
-  background-color: #2be080;
+  background-color: rgba(43, 224, 128, 1);
 }
 .tech__link:hover > .tech__text {
   color: rgba(255, 255, 255, 1);
