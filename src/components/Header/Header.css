@@ -6,85 +6,40 @@
   justify-content: space-between;
   padding: 18px 70px;
   position: relative;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 1);
 }
 .header_logout {
-  background-color: #073042;
+  background-color: rgba(7, 48, 66, 1);
 }
-.header__logo {
-  width: 38px;
-  height: 38px;
-}
-.header__logo:hover {
-  opacity: 0.7;
-}
-.header__nav {
-  display: flex;
+.header__nav_label {
+  justify-content: center;
   align-items: center;
+  display: none;
 }
-.header__link {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
-  border: none;
-  background: none;
-  text-decoration: none;
-  color: #000000;
-  text-align: center;
+.header__nav_checkbox {
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
-.header__link:hover {
-  opacity: 0.7;
-}
-.header__link:not(:last-child) {
-  margin-right: 20px;
-}
-.header__link_active {
-  border-bottom: 2px solid #000000;
-  transition: all 0.1s ease;
-}
-.header__link_signup {
-  color: #ffffff;
-}
-.header__link_signin {
-  padding: 8px 20px;
-  background-color: #2be080;
-  border-radius: 3px;
-}
-.header__box {
-  display: flex;
-  align-items: center;
-  margin-left: 30px;
-}
-.header__account-icon {
-  width: 30px;
-  height: 30px;
-  margin-left: 13px;
-  border-radius: 50%;
-  background-image: url(../../images/icon__COLOR_icon-main.svg);
-  background-color: rgba(245, 245, 245, 1);
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
 @media screen and (max-width: 768px) {
   .header {
     padding: 18px 30px;
   }
-  .header__link:not(:last-child) {
-    margin-right: 30px;
+
+  .header__nav_label {
+    z-index: 11;
+    display: flex;
+  }
+  .header__nav_label:has(.header__nav_checkbox:checked) ~ .header__nav_enter {
+    visibility: visible;
+    transform: translateX(0);
+    transition: all 0.7s ease;
+    z-index: 10;
   }
 }
 @media screen and (max-width: 425px) {
   .header {
     padding: 18px 14px;
-  }
-  .header__link {
-    font-size: 10px;
-    line-height: 16px;
-  }
-  .header__link:not(:last-child) {
-    margin-right: 14px;
   }
 }
