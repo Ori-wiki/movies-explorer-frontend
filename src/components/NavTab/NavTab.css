@@ -8,7 +8,7 @@
 .nav__link {
   text-decoration-line: none;
   color: rgba(255, 255, 255, 1);
-  font-family: Inter;
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 13px;
   font-weight: 500;
   line-height: 16px;

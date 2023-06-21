@@ -3,7 +3,7 @@
 }
 .search-form__label {
   padding-left: 50px;
-  font-family: Inter;
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 13px;
   font-weight: 400;
   line-height: 18px;
