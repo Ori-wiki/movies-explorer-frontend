@@ -8,7 +8,7 @@ function Register() {
   return (
     <section className='register'>
       <Logo />
-      <h2 className='register__title'>Добро пожаловать!</h2>
+      <h1 className='register__title'>Добро пожаловать!</h1>
       <form className='register__form'>
         <label className='register__label'>
           Имя

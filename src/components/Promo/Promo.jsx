@@ -4,11 +4,11 @@ import './Promo.css';
 function Promo() {
   return (
     <section className='promo'>
-      <h2 className='promo__title'>
+      <h1 className='promo__title'>
         Учебный проект студента
         <br />
         факультета Веб-разработки.
-      </h2>
+      </h1>
     </section>
   );
 }
