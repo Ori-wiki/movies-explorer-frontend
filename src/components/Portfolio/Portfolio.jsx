@@ -5,7 +5,7 @@ import ProjectLink from '../ProjectLink/ProjectLink';
 function Portfolio() {
   return (
     <section className='portfolio'>
-      <h2 className='portofolio__title'>Портфолио</h2>
+      <h2 className='portfolio__title'>Портфолио</h2>
       <ul className='portfolio__list'>
         <ProjectLink
           link={'https://github.com/Ori-wiki/how-to-learn'}

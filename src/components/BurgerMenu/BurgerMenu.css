@@ -4,16 +4,16 @@
   gap: 7px;
   cursor: pointer;
 }
-.header__nav_checkbox:checked + .menu .menu__line_position_top {
+.header__checkbox:checked + .menu .menu__line_position_top {
   transition: translate 0.3s, rotate 0.3s 0.3s;
   translate: 0px 10px;
   rotate: 45deg;
 }
-.header__nav_checkbox:checked + .menu .menu__line_position_center {
+.header__checkbox:checked + .menu .menu__line_position_center {
   transition: scale 0.3s;
   scale: 0;
 }
-.header__nav_checkbox:checked + .menu .menu__line_position_button {
+.header__checkbox:checked + .menu .menu__line_position_button {
   transition: translate 0.3s, rotate 0.3s 0.3s;
   translate: 0px -10px;
   rotate: 135deg;
@@ -41,10 +41,10 @@
   .menu {
     gap: 6.5px;
   }
-  .header__nav_checkbox:checked + .menu .menu__line_position_top {
+  .header__checkbox:checked + .menu .menu__line_position_top {
     translate: 0px 9px;
   }
-  .header__nav_checkbox:checked + .menu .menu__line_position_button {
+  .header__checkbox:checked + .menu .menu__line_position_button {
     translate: 0px -9px;
   }
   .menu__line {

@@ -1,7 +1,7 @@
 .portfolio {
   padding: 0 70px 125px;
 }
-.portofolio__title {
+.portfolio__title {
   font-family: Inter;
   font-size: 18px;
   font-weight: 400;
@@ -21,7 +21,7 @@
   .portfolio {
     padding: 0 14px 70px;
   }
-  .portofolio__title {
+  .portfolio__title {
     font-size: 14px;
     line-height: 20px;
   }

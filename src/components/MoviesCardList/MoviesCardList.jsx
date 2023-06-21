@@ -12,7 +12,7 @@ function MoviesCardList({ savedMoviesPage = false }) {
   };
 
   return (
-    <section className='movies__card-list'>
+    <section className='movies-card-list'>
       <MoviesCard
         movie={movie}
         saved={true}

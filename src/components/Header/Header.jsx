@@ -15,8 +15,8 @@ function Header({ loggedIn = false }) {
   ) : (
     <header className='header'>
       <Logo />
-      <label className='header__nav_label'>
-        <input type='checkbox' className=' header__nav_checkbox' />
+      <label className='header__label'>
+        <input type='checkbox' className='header__checkbox' />
         <BurgerMenu />
       </label>
       <Navigation loggedIn={loggedIn} />

@@ -16,7 +16,7 @@ function Movies() {
         <Preloader />
       ) : (
         <>
-          <MoviesCardList /> <button className='movie__button'>Ещё</button>
+          <MoviesCardList /> <button className='movies__button'>Ещё</button>
         </>
       )}
     </section>

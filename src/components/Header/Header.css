@@ -11,12 +11,12 @@
 .header_logout {
   background-color: rgba(7, 48, 66, 1);
 }
-.header__nav_label {
+.header__label {
   justify-content: center;
   align-items: center;
   display: none;
 }
-.header__nav_checkbox {
+.header__checkbox {
   position: absolute;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -27,11 +27,11 @@
     padding: 18px 30px;
   }
 
-  .header__nav_label {
+  .header__label {
     z-index: 11;
     display: flex;
   }
-  .header__nav_label:has(.header__nav_checkbox:checked) ~ .header__nav_enter {
+  .header__label:has(.header__checkbox:checked) ~ .header__nav_enter {
     visibility: visible;
     transform: translateX(0);
     transition: all 0.7s ease;

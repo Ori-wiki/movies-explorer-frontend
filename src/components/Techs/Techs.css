@@ -15,7 +15,7 @@
   margin: 90px 0 26px;
   text-align: center;
 }
-.tects__text {
+.techs__text {
   font-family: Inter;
   font-size: 14px;
   font-weight: 400;
@@ -38,7 +38,7 @@
   .techs {
     padding: 90px 50px;
   }
-  .tects__text {
+  .techs__text {
     font-size: 12px;
     line-height: 18px;
   }
@@ -55,7 +55,7 @@
     font-size: 30px;
     line-height: 36px;
   }
-  .tects__text {
+  .techs__text {
     font-size: 11px;
     line-height: 16px;
   }
