@@ -24,13 +24,13 @@ function AboutProject() {
       </div>
       <div className="about__progress">
         <div className="about__progress-container">
-          <span className="about__progress-time about__progress-time_green">
+          <p className="about__progress-time about__progress-time_green">
             1 неделя
-          </span>
+          </p>
           <span className="about__progress-text">Back-end</span>
         </div>
         <div className="about__progress-container">
-          <span className="about__progress-time ">4 недели</span>
+          <p className="about__progress-time ">4 недели</p>
           <span className="about__progress-text">Front-end</span>
         </div>
       </div>

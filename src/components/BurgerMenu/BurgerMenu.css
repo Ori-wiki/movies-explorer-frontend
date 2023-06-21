@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 7px;
   cursor: pointer;
+  list-style: none;
 }
 .header__nav_checkbox:checked + .menu .menu__line_position_top {
   transition: translate 0.3s, rotate 0.3s 0.3s;
