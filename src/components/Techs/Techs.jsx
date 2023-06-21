@@ -22,7 +22,7 @@ function Techs() {
         На курсе веб-разработки мы освоили технологии, которые применили в
         дипломном проекте.
       </p>
-      <div className='techs__container'>
+      <ul className='techs__container'>
         <Tech text={'HTML'} link={techsLinks.html} />
         <Tech text={'CSS'} link={techsLinks.css} />
         <Tech text={'JS'} link={techsLinks.js} />
@@ -30,7 +30,7 @@ function Techs() {
         <Tech text={'Git'} link={techsLinks.git} />
         <Tech text={`Express.js`} link={techsLinks.express} />
         <Tech text={'MongoDB'} link={techsLinks.mongo} />
-      </div>
+      </ul>
     </section>
   );
 }
