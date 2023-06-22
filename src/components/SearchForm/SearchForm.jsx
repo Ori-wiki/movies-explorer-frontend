@@ -8,6 +8,8 @@ function SearchForm() {
     <section className='search-form'>
       <form className='search-form__conntainer' name='search-form'>
         <input
+          required
+          autoComplete='off'
           className='search-form__input'
           type='text'
           name='movies'
@@ -16,6 +18,7 @@ function SearchForm() {
         />
         <button type='submit' className='search-form__button-submit'></button>
       </form>
+      <span className='search-form__input-error'>sssdsdsss</span>
       <FilterCheckbox />
     </section>
   );
