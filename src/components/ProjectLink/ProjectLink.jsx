@@ -11,6 +11,7 @@ function ProjectLink({ link, text }) {
         rel='noreferrer'
       >
         {text}
+        <span className='portfolio__list-icon'></span>
       </a>
     </li>
   );

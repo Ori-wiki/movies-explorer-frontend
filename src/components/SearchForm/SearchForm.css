@@ -5,7 +5,6 @@
   display: flex;
   border-bottom: 1px solid rgba(232, 232, 232, 1);
   font-size: 0;
-  /* flex-direction: column; */
 }
 .search-form__input {
   font-family: 'Inter', Arial, sans-serif;
