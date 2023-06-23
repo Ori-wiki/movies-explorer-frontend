@@ -5,10 +5,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function Movies() {
+function Movies({ cards }) {
   // const [isDataLoading, setIsDataLoading] = useState(false);
   const isDataLoading = false;
-
   return (
     <section className='movies'>
       <SearchForm />
@@ -16,7 +15,8 @@ function Movies() {
         <Preloader />
       ) : (
         <>
-          <MoviesCardList /> <button className='movies__button'>Ещё</button>
+          <MoviesCardList cards={cards} />{' '}
+          <button className='movies__button'>Ещё</button>
         </>
       )}
     </section>

@@ -13,7 +13,7 @@ function endingOfNum(n, textForms) {
   return textForms[2];
 }
 
-export function transformTime(duration) {
+export const transformTime = (duration) => {
   const hours = Math.trunc(duration / 60);
   const minutes = duration % 60;
   if (hours === 0) {
@@ -26,3 +26,10 @@ export function transformTime(duration) {
     ])} ${minutes} ${endingOfNum(minutes, ['минута', 'минуты', 'минут'])}`;
   }
 }
+
+export const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json(); //если да, то возвращает полученные данные
+  }
+  return Promise.reject(`Error: ${res.status}`); //иначе возвращает ошибку
+};
