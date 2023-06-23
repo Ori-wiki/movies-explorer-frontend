@@ -5,7 +5,6 @@ import './MoviesCard.css';
 import { transformTime } from '../../utils/utils';
 
 function MoviesCard({ card, savedMoviesPage = false, saved = false }) {
-  console.log(card.image.url);
   return (
     <div className='movies-card'>
       <h4 className='movies-card__title'>{card.nameRU}</h4>

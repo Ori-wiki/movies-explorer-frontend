@@ -3,6 +3,7 @@
   max-width: 1280px;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 .movies__button {
   margin: 50px auto 80px;

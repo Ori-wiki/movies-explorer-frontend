@@ -12,8 +12,6 @@ import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import Error from '../Error/Error';
 
-import { getMovies } from '../../utils/MoviesApi';
-
 function App() {
   const headerEndpoints = ['/', '/movies', '/saved-movies', '/profile'];
   const footerEndpoints = ['/', '/movies', '/saved-movies'];
@@ -22,17 +20,13 @@ function App() {
     name: 'Денис',
   };
 
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    getMovies()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  console.log(cards);
+  // useEffect(() => {
+  //   getMovies()
+  //     .then((res) => {
+  //       setCards(res);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   return (
     <div className='App'>
@@ -46,7 +40,7 @@ function App() {
         <Route path='/' element={<Main />} />
         <Route path='/sign-in' element={<Login />} />
         <Route path='/sign-up' element={<Register />} />
-        <Route path='/movies' element={<Movies cards={cards} />} />
+        <Route path='/movies' element={<Movies />} />
         <Route path='/saved-movies' element={<SavedMovies />} />
         <Route path='/profile' element={<Profile user={user} />} />
         <Route

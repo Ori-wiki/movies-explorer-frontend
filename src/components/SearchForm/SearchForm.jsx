@@ -3,10 +3,14 @@ import React from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm() {
+function SearchForm({ onSubmit }) {
   return (
     <section className='search-form'>
-      <form className='search-form__conntainer' name='search-form'>
+      <form
+        className='search-form__conntainer'
+        name='search-form'
+        onSubmit={onSubmit}
+      >
         <input
           required
           autoComplete='off'
