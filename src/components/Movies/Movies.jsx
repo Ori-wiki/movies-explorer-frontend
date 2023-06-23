@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Movies.css';
 
 import SearchForm from '../SearchForm/SearchForm';
@@ -18,8 +18,6 @@ function Movies() {
     },
   };
 
-  const elRef = useRef();
-
   const [number, setIsNumber] = useState(0);
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [cards, setCards] = useState([]);
@@ -32,27 +30,25 @@ function Movies() {
         setCards(res);
       })
       .catch((err) => console.log(err))
-      .finally(() => setIsDataLoading(false));
+      .finally(() => {
+        setIsNumber(number + 3);
+        setIsDataLoading(false);
+      });
   };
   // console.log(number);
   const handleClick = () => {
-    setIsNumber(number + 243);
+    setIsNumber(number + 3);
   };
 
-  // useEffect(() => {
-  //   let Elementcount = elRef.current.childNodes[1].childNodes.length;
-  //   console.log(Elementcount);
-  // }, [setIsNumber]);
-  console.log(elRef.current);
   return (
-    <section className='movies' ref={elRef}>
+    <section className='movies'>
       <SearchForm onSubmit={handleSubmit} />
       {isDataLoading ? (
         <Preloader />
       ) : (
         <>
-          <MoviesCardList cards={cards} number={number + 3} />
-          {2 && number < 100 ? (
+          <MoviesCardList cards={cards} number={number} />
+          {3 <= number && number < 100 ? (
             <button className='movies__button' onClick={handleClick}>
               Ещё
             </button>
