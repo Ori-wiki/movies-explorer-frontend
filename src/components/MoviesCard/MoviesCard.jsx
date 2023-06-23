@@ -4,14 +4,17 @@ import './MoviesCard.css';
 
 import { transformTime } from '../../utils/utils';
 
-function MoviesCard({ movie, savedMoviesPage = false, saved = false }) {
-  console.log(movie);
-
+function MoviesCard({ card, savedMoviesPage = false, saved = false }) {
+  console.log(card.image.url);
   return (
     <div className='movies-card'>
-      <h4 className='movies-card__title'>{movie.name}</h4>
-      <span className='movies-card__time'>{transformTime(movie.duration)}</span>
-      <img className='movies-card__img' alt='фильм' src={movie.image} />
+      <h4 className='movies-card__title'>{card.nameRU}</h4>
+      <span className='movies-card__time'>{transformTime(card.duration)}</span>
+      <img
+        className='movies-card__img'
+        alt='фильм'
+        src={`https://api.nomoreparties.co${card.image.url}`}
+      />
       {savedMoviesPage ? (
         <button className='movies-card__button movies-card__button-delete'></button>
       ) : (

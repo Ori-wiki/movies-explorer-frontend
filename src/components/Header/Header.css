@@ -32,7 +32,9 @@
   .header {
     padding: 18px 30px;
   }
-
+  .header_theme_dark .header__nav .header__link {
+    color: rgba(0, 0, 0, 1);
+  }
   .header__label {
     z-index: 11;
     display: flex;
