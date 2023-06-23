@@ -1,0 +1,107 @@
+.header__nav {
+  display: flex;
+  align-items: center;
+}
+.header__link {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  border: none;
+  background: none;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 1);
+  text-align: center;
+}
+.header__link:hover {
+  opacity: 0.7;
+}
+.header__link:not(:last-child) {
+  margin-right: 20px;
+}
+.header__link_active {
+  border-bottom: 2px solid rgba(0, 0, 0, 1);
+  transition: all 0.1s ease;
+}
+.header__link_signup {
+  color: rgba(255, 255, 255, 1);
+}
+.header__link_signin {
+  padding: 8px 20px;
+  background-color: rgba(43, 224, 128, 1);
+  border-radius: 3px;
+}
+.header__link_enter:first-child {
+  display: none;
+}
+.header__box {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+.header__account-icon {
+  width: 30px;
+  height: 30px;
+  margin-left: 13px;
+  border-radius: 50%;
+  background-image: url(../../images/icon__COLOR_icon-main.svg);
+  background-color: rgba(245, 245, 245, 1);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+@media screen and (max-width: 768px) {
+  .header__link:not(:last-child) {
+    margin-right: 30px;
+  }
+  .header__nav_enter {
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 75%;
+    background-color: rgba(255, 255, 255, 1);
+    z-index: 9;
+    transform: translateX(100%);
+    transition: all 0.7s ease;
+  }
+  .header__link_enter {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .header__link_enter:not(:last-child) {
+    margin: 0 0 28px 0;
+  }
+  .header__link_enter:last-child {
+    margin: auto 0 92px 0;
+  }
+  .header__link_enter:first-child {
+    display: block;
+    margin: 159px 0 28px 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .header__link {
+    font-size: 10px;
+    line-height: 16px;
+  }
+  .header__link:not(:last-child) {
+    margin-right: 14px;
+  }
+  .header__nav_enter {
+    width: 100%;
+  }
+  .header__link_enter {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .header__link_enter:not(:last-child) {
+    margin: 0 0 28px 0;
+  }
+  .header__link_enter:first-child {
+    display: block;
+    margin: 159px 0 28px 0;
+  }
+}
