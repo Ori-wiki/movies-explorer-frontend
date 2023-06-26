@@ -7,31 +7,9 @@ import Preloader from '../Preloader/Preloader';
 
 import { getMovies } from '../../utils/MoviesApi';
 import { filterMovies } from '../../utils/utils';
+import { deviceParams } from '../../utils/constants';
 
 function Movies() {
-  const deviceParams = {
-    laptop: {
-      width: 1276,
-      cards: {
-        total: 12,
-        step: 3,
-      },
-    },
-    tablet: {
-      width: 786,
-      cards: {
-        total: 8,
-        step: 2,
-      },
-    },
-    mobile: {
-      width: 320,
-      cards: {
-        total: 5,
-        step: 2,
-      },
-    },
-  };
   const { laptop, tablet, mobile } = deviceParams;
 
   const [width, setWidth] = useState(window.innerWidth);
@@ -55,7 +33,6 @@ function Movies() {
     setIsDataLoading(true);
     getMovies()
       .then((res) => {
-        // console.log(res);
         handleSetMovies(res, movie);
       })
       .catch((e) => {
@@ -63,7 +40,6 @@ function Movies() {
         console.log(e);
       })
       .finally(() => {
-        // setIsNumber(number + 3);
         setIsDataLoading(false);
       });
   };
