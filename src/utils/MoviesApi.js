@@ -1,14 +1,11 @@
 import { checkResponse } from './utils';
-
-const BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+import { MOVIES_URL } from './constants';
 
 export const getMovies = () => {
-  return fetch(BASE_URL, {
+  return fetch(MOVIES_URL, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   }).then((res) => checkResponse(res));
 };
-
-// console.log(getMovies() )

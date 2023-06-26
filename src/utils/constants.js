@@ -16,8 +16,10 @@ export const deviceParams = {
   mobile: {
     width: 320,
     cards: {
-      total: 5,
-      step: 2,
+      total: 1,
+      step: 1,
     },
   },
 };
+
+export const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';

@@ -24,12 +24,14 @@ function Movies() {
 
   const handleSetMovies = (res, movie) => {
     const movies = filterMovies(res, movie);
+    localStorage.setItem('movies', JSON.stringify(movies));
     setCards(movies);
     movies.length === 0 ? setNotFound(true) : setNotFound(false);
   };
 
   const handleSubmit = (movie) => {
-    // localStorage.setItem('movieSearch', movie);
+    localStorage.setItem('movieSearch', movie);
+    localStorage.setItem('startNumber', startNumber);
     setIsDataLoading(true);
     getMovies()
       .then((res) => {
@@ -45,8 +47,9 @@ function Movies() {
   };
 
   const handleClick = () => {
-    console.log(step);
+    // console.log(step);
     setIsNumber(number + step);
+    localStorage.setItem('number', number + step);
   };
 
   useEffect(() => {
@@ -74,10 +77,29 @@ function Movies() {
     );
   }, [width, laptop, tablet, mobile]);
 
-  console.log(number + ' number');
-  console.log(startNumber + ' startNumber');
+  useEffect(() => {
+    if (localStorage.getItem('movies')) {
+      const list = JSON.parse(localStorage.getItem('movies'));
+      setCards(list);
+    }
+    if (localStorage.getItem('number')) {
+      const num = JSON.parse(localStorage.getItem('number'));
+      setIsNumber(num);
+    }
+    // Если изменять ширину экрана, после отрисовки карточек,
+    // их количество остаётся неизменным
+    if (localStorage.getItem('startNumber')) {
+      const startNum = JSON.parse(localStorage.getItem('startNumber'));
+      console.log(startNum);
+      setStartNumber(startNum);
+    }
+  }, [startNumber]);
+
+  // console.log(startNumber + ' startNumber');
   // console.log(step);
   // console.log(cards);
+
+  // localStorage.clear();
   return (
     <section className='movies'>
       <SearchForm onSubmit={handleSubmit} />
@@ -97,7 +119,7 @@ function Movies() {
             <MoviesCardList cards={cards} number={number + startNumber} />
           )}
 
-          {3 <= startNumber && number + startNumber < cards.length ? (
+          {1 <= startNumber && number + startNumber < cards.length ? (
             <button className='movies__button' onClick={handleClick}>
               Ещё
             </button>
