@@ -9,9 +9,6 @@ function MoviesCardList({
   count,
   shortMoviesCards,
 }) {
-  console.log(shortMoviesCards);
-  console.log(moviesCards);
-
   return (
     <section className='movies-card-list'>
       {shortMoviesCards.length !== 0

@@ -93,9 +93,7 @@ function Movies() {
   const handleShortFilms = () => {
     setcheckboxValue(!checkboxValue);
     localStorage.setItem('checkboxValue', !checkboxValue);
-    // console.log('чекбокс клик');
     if (!checkboxValue) {
-      // console.log(true);
       const shortMovies = filterShortMovies(moviesCards);
       if (shortMovies.length === 0) {
         setNotFound(true);
@@ -105,7 +103,6 @@ function Movies() {
         localStorage.setItem('shortMovies', JSON.stringify(shortMovies));
       }
     } else {
-      // console.log(false);
       if (moviesCards.length === 0) {
         setNotFound(true);
       } else {
@@ -116,7 +113,6 @@ function Movies() {
     }
   };
 
-  console.log(moviesCards);
   const handleClick = () => {
     setCount(count + step);
     localStorage.setItem('count', count + step);
@@ -124,7 +120,6 @@ function Movies() {
 
   useEffect(() => {
     if (localStorage.getItem('shortMovies')) {
-      console.log('в локале есть короткие фильмы');
       const shortList = JSON.parse(localStorage.getItem('shortMovies'));
       if (shortList.length === 0) {
         setNotFound(true);
@@ -133,7 +128,6 @@ function Movies() {
         setShortMoviesCards(shortList);
       }
     } else if (localStorage.getItem('movies')) {
-      console.log('в локале нету короткие фильмы');
       const list = JSON.parse(localStorage.getItem('movies'));
       if (list.length === 0) {
         setNotFound(true);
@@ -143,7 +137,6 @@ function Movies() {
       }
     }
     if (localStorage.getItem('movies')) {
-      console.log('в локале нету короткие фильмы');
       const list = JSON.parse(localStorage.getItem('movies'));
       if (list.length === 0) {
         setNotFound(true);
@@ -163,8 +156,6 @@ function Movies() {
       setcheckboxValue(check);
     }
   }, []);
-
-  // console.log(checkboxValue + 'чекбокс щначение');
 
   return (
     <section className='movies'>
