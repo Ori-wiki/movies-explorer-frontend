@@ -6,21 +6,54 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
 import { getMovies } from '../../utils/MoviesApi';
-import { filterMovies } from '../../utils/utils';
+import { filterMovies, filterShortMovies } from '../../utils/utils';
+
 import { deviceParams } from '../../utils/constants';
 
 function Movies() {
   const { laptop, tablet, mobile } = deviceParams;
-
   const [width, setWidth] = useState(window.innerWidth);
-  const [number, setIsNumber] = useState(0);
-  const [startNumber, setStartNumber] = useState(12);
-
+  const [count, setCount] = useState(0);
+  const [total, setTotal] = useState(
+    JSON.parse(localStorage.getItem('total')) || 12
+  );
   const [step, setStep] = useState(3);
+
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [cards, setCards] = useState([]);
   const [isError, setIsError] = useState(false);
   const [notFound, setNotFound] = useState(false);
+  const [checkboxValue, setcheckboxValue] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem('movies')) {
+      console.log('нету муви');
+      setTotal(
+        width >= laptop.width
+          ? laptop.cards.total
+          : width >= tablet.width
+          ? tablet.cards.total
+          : mobile.cards.total
+      );
+    }
+    setStep(
+      width >= laptop.width
+        ? laptop.cards.step
+        : width >= tablet.width
+        ? tablet.cards.step
+        : mobile.cards.step
+    );
+    localStorage.setItem('total', total);
+  }, [width, laptop, tablet, mobile, cards, total]);
+
+  useEffect(() => {
+    window.onresize = () => {
+      setTimeout(() => {
+        setWidth(window.innerWidth);
+      }, 700);
+    };
+  }, []);
+  console.log(total + ' total ' + step + ' step ');
 
   const handleSetMovies = (res, movie) => {
     const movies = filterMovies(res, movie);
@@ -31,8 +64,8 @@ function Movies() {
 
   const handleSubmit = (movie) => {
     localStorage.setItem('movieSearch', movie);
-    localStorage.setItem('startNumber', startNumber);
     setIsDataLoading(true);
+    setCount(0);
     getMovies()
       .then((res) => {
         handleSetMovies(res, movie);
@@ -46,63 +79,56 @@ function Movies() {
       });
   };
 
-  const handleClick = () => {
-    // console.log(step);
-    setIsNumber(number + step);
-    localStorage.setItem('number', number + step);
+  const handleShortFilms = () => {
+    setcheckboxValue(!checkboxValue);
+    console.log('чекбокс клик');
+    if (!checkboxValue) {
+      if (filterShortMovies(cards).length === 0) {
+        // setFilteredMovies(filterShortMovies(cards));
+        console.log('aaaaaa');
+        setNotFound(true);
+        //   } else {
+        //     setFilteredMovies(filterShortMovies(initialMovies));
+        //     setNotFound(false);
+        //   }
+        // } else {
+        //   initialMovies.length === 0 ? setNotFound(true) : setNotFound(false);
+        //   setFilteredMovies(initialMovies);
+        // }
+        // localStorage.setItem(`${user.email} - shortMovies`, !shortMovies);
+      }
+    }
   };
 
-  useEffect(() => {
-    window.onresize = () => {
-      setTimeout(() => {
-        setWidth(window.innerWidth);
-      }, 700);
-    };
-  }, []);
-
-  useEffect(() => {
-    setStartNumber(
-      width > laptop.width
-        ? laptop.cards.total
-        : width >= tablet.width
-        ? tablet.cards.total
-        : mobile.cards.total
-    );
-    setStep(
-      width > laptop.width
-        ? laptop.cards.step
-        : width >= tablet.width
-        ? tablet.cards.step
-        : mobile.cards.step
-    );
-  }, [width, laptop, tablet, mobile]);
+  const handleClick = () => {
+    console.log('+1');
+    setCount(count + step);
+    localStorage.setItem('count', count + step);
+  };
 
   useEffect(() => {
     if (localStorage.getItem('movies')) {
       const list = JSON.parse(localStorage.getItem('movies'));
-      setCards(list);
+      if (list.length === 0) {
+        setNotFound(true);
+        console.log('меняет на тру');
+      } else {
+        setNotFound(false);
+        console.log('меняет на фалсе');
+        setCards(list);
+      }
     }
-    if (localStorage.getItem('number')) {
-      const num = JSON.parse(localStorage.getItem('number'));
-      setIsNumber(num);
+    if (localStorage.getItem('count')) {
+      const num = JSON.parse(localStorage.getItem('count'));
+      console.log(num + 'num');
+      setCount(num);
     }
-    // Если изменять ширину экрана, после отрисовки карточек,
-    // их количество остаётся неизменным
-    if (localStorage.getItem('startNumber')) {
-      const startNum = JSON.parse(localStorage.getItem('startNumber'));
-      console.log(startNum);
-      setStartNumber(startNum);
-    }
-  }, [startNumber]);
+  }, []);
 
-  // console.log(startNumber + ' startNumber');
-  // console.log(step);
-  // console.log(cards);
-
-  // localStorage.clear();
+  console.log(notFound);
   return (
     <section className='movies'>
-      <SearchForm onSubmit={handleSubmit} />
+      <SearchForm onSubmit={handleSubmit} checkboxClick={handleShortFilms} />
       {isDataLoading ? (
         <Preloader />
       ) : (
@@ -116,10 +142,10 @@ function Movies() {
               ещё раз
             </h3>
           ) : (
-            <MoviesCardList cards={cards} number={number + startNumber} />
+            <MoviesCardList cards={cards} count={count + total} />
           )}
 
-          {1 <= startNumber && number + startNumber < cards.length ? (
+          {0 < total && count + total < cards.length ? (
             <button className='movies__button' onClick={handleClick}>
               Ещё
             </button>

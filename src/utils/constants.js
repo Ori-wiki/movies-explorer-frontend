@@ -7,7 +7,7 @@ export const deviceParams = {
     },
   },
   tablet: {
-    width: 786,
+    width: 768,
     cards: {
       total: 8,
       step: 2,

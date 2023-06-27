@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ onSubmit }) {
-  const [movie, setMovie] = React.useState('');
+function SearchForm({ onSubmit, checkboxClick }) {
+  const [movie, setMovie] = useState('');
+
   function handleChangeName(e) {
     setMovie(e.target.value);
   }
@@ -14,6 +15,12 @@ function SearchForm({ onSubmit }) {
 
     onSubmit(movie);
   };
+  useEffect(() => {
+    if (localStorage.getItem('movieSearch')) {
+      const movieValue = localStorage.getItem('movieSearch');
+      setMovie(movieValue);
+    }
+  }, []);
 
   return (
     <section className='search-form'>
@@ -36,7 +43,7 @@ function SearchForm({ onSubmit }) {
         <button type='submit' className='search-form__button-submit'></button>
       </form>
       <span className='search-form__input-error'>sssdsdsss</span>
-      <FilterCheckbox />
+      <FilterCheckbox checkboxClick={checkboxClick} />
     </section>
   );
 }
