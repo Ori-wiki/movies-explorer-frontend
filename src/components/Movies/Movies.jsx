@@ -20,14 +20,14 @@ function Movies() {
   const [step, setStep] = useState(3);
 
   const [isDataLoading, setIsDataLoading] = useState(false);
-  const [cards, setCards] = useState([]);
+  const [moviesCards, setMoviesCards] = useState([]);
+  const [shortMoviesCards, setShortMoviesCards] = useState([]);
   const [isError, setIsError] = useState(false);
   const [notFound, setNotFound] = useState(false);
   const [checkboxValue, setcheckboxValue] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem('movies')) {
-      console.log('нету муви');
       setTotal(
         width >= laptop.width
           ? laptop.cards.total
@@ -44,7 +44,7 @@ function Movies() {
         : mobile.cards.step
     );
     localStorage.setItem('total', total);
-  }, [width, laptop, tablet, mobile, cards, total]);
+  }, [width, laptop, tablet, mobile, total]);
 
   useEffect(() => {
     window.onresize = () => {
@@ -53,19 +53,30 @@ function Movies() {
       }, 700);
     };
   }, []);
-  console.log(total + ' total ' + step + ' step ');
 
   const handleSetMovies = (res, movie) => {
     const movies = filterMovies(res, movie);
-    localStorage.setItem('movies', JSON.stringify(movies));
-    setCards(movies);
     movies.length === 0 ? setNotFound(true) : setNotFound(false);
+    setMoviesCards(movies);
+    localStorage.setItem('movies', JSON.stringify(movies));
+    if (checkboxValue) {
+      const shortMovies = filterShortMovies(movies);
+      shortMovies.length === 0 ? setNotFound(true) : setNotFound(false);
+      setShortMoviesCards(shortMovies);
+    }
   };
 
   const handleSubmit = (movie) => {
     localStorage.setItem('movieSearch', movie);
     setIsDataLoading(true);
     setCount(0);
+    setTotal(
+      width >= laptop.width
+        ? laptop.cards.total
+        : width >= tablet.width
+        ? tablet.cards.total
+        : mobile.cards.total
+    );
     getMovies()
       .then((res) => {
         handleSetMovies(res, movie);
@@ -81,54 +92,87 @@ function Movies() {
 
   const handleShortFilms = () => {
     setcheckboxValue(!checkboxValue);
-    console.log('чекбокс клик');
+    localStorage.setItem('checkboxValue', !checkboxValue);
+    // console.log('чекбокс клик');
     if (!checkboxValue) {
-      if (filterShortMovies(cards).length === 0) {
-        // setFilteredMovies(filterShortMovies(cards));
-        console.log('aaaaaa');
+      // console.log(true);
+      const shortMovies = filterShortMovies(moviesCards);
+      if (shortMovies.length === 0) {
         setNotFound(true);
-        //   } else {
-        //     setFilteredMovies(filterShortMovies(initialMovies));
-        //     setNotFound(false);
-        //   }
-        // } else {
-        //   initialMovies.length === 0 ? setNotFound(true) : setNotFound(false);
-        //   setFilteredMovies(initialMovies);
-        // }
-        // localStorage.setItem(`${user.email} - shortMovies`, !shortMovies);
+      } else {
+        setNotFound(false);
+        setShortMoviesCards(shortMovies);
+        localStorage.setItem('shortMovies', JSON.stringify(shortMovies));
+      }
+    } else {
+      // console.log(false);
+      if (moviesCards.length === 0) {
+        setNotFound(true);
+      } else {
+        setNotFound(false);
+        localStorage.removeItem('shortMovies');
+        setShortMoviesCards([]);
       }
     }
   };
 
+  console.log(moviesCards);
   const handleClick = () => {
-    console.log('+1');
     setCount(count + step);
     localStorage.setItem('count', count + step);
   };
 
   useEffect(() => {
-    if (localStorage.getItem('movies')) {
+    if (localStorage.getItem('shortMovies')) {
+      console.log('в локале есть короткие фильмы');
+      const shortList = JSON.parse(localStorage.getItem('shortMovies'));
+      if (shortList.length === 0) {
+        setNotFound(true);
+      } else {
+        setNotFound(false);
+        setShortMoviesCards(shortList);
+      }
+    } else if (localStorage.getItem('movies')) {
+      console.log('в локале нету короткие фильмы');
       const list = JSON.parse(localStorage.getItem('movies'));
       if (list.length === 0) {
         setNotFound(true);
-        console.log('меняет на тру');
       } else {
         setNotFound(false);
-        console.log('меняет на фалсе');
-        setCards(list);
+        setMoviesCards(list);
       }
     }
+    if (localStorage.getItem('movies')) {
+      console.log('в локале нету короткие фильмы');
+      const list = JSON.parse(localStorage.getItem('movies'));
+      if (list.length === 0) {
+        setNotFound(true);
+      } else {
+        setNotFound(false);
+        setMoviesCards(list);
+      }
+    }
+
     if (localStorage.getItem('count')) {
       const num = JSON.parse(localStorage.getItem('count'));
-      console.log(num + 'num');
       setCount(num);
+    }
+
+    if (localStorage.getItem('checkboxValue')) {
+      const check = JSON.parse(localStorage.getItem('checkboxValue'));
+      setcheckboxValue(check);
     }
   }, []);
 
-  console.log(notFound);
+  // console.log(checkboxValue + 'чекбокс щначение');
+
   return (
     <section className='movies'>
-      <SearchForm onSubmit={handleSubmit} checkboxClick={handleShortFilms} />
+      <SearchForm
+        onSubmit={handleSubmit}
+        checkboxClick={handleShortFilms}
+        checkboxValue={checkboxValue}
+      />
       {isDataLoading ? (
         <Preloader />
       ) : (
@@ -142,10 +186,23 @@ function Movies() {
               ещё раз
             </h3>
           ) : (
-            <MoviesCardList cards={cards} count={count + total} />
+            <MoviesCardList
+              savedMoviesPage={false}
+              moviesCards={moviesCards}
+              count={count + total}
+              shortMoviesCards={shortMoviesCards}
+            />
           )}
 
-          {0 < total && count + total < cards.length ? (
+          {shortMoviesCards.length !== 0 ? (
+            0 < total && count + total < shortMoviesCards.length ? (
+              <button className='movies__button' onClick={handleClick}>
+                Ещё
+              </button>
+            ) : (
+              ''
+            )
+          ) : 0 < total && count + total < moviesCards.length ? (
             <button className='movies__button' onClick={handleClick}>
               Ещё
             </button>

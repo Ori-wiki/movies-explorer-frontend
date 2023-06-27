@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ onSubmit, checkboxClick }) {
+function SearchForm({ onSubmit, checkboxClick, checkboxValue }) {
   const [movie, setMovie] = useState('');
 
   function handleChangeName(e) {
@@ -43,7 +43,10 @@ function SearchForm({ onSubmit, checkboxClick }) {
         <button type='submit' className='search-form__button-submit'></button>
       </form>
       <span className='search-form__input-error'>sssdsdsss</span>
-      <FilterCheckbox checkboxClick={checkboxClick} />
+      <FilterCheckbox
+        checkboxClick={checkboxClick}
+        checkboxValue={checkboxValue}
+      />
     </section>
   );
 }
