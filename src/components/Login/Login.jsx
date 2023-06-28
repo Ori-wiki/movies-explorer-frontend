@@ -6,7 +6,7 @@ import './Login.css';
 
 import Logo from '../Logo/Logo';
 
-function Login({ onLogin }) {
+function Login({ onLogin, errorText = '' }) {
   const { values, errors, isValid, handleChange } = useFormWithValidation();
 
   const handleSubmit = (e) => {
@@ -66,7 +66,25 @@ function Login({ onLogin }) {
         >
           {errors.password}
         </span>
-        <button type='submit' className='login__button-submit'>
+        <span
+          className={`${
+            errorText.message
+              ? 'login__form-error login__form-error_visible'
+              : 'login__form-error'
+          }`}
+        >
+          {errorText.message}
+        </span>
+
+        <button
+          type='submit'
+          className={
+            isValid
+              ? 'login__button-submit'
+              : 'login__button-submit login__button-submit_disable'
+          }
+          disabled={!isValid && true}
+        >
           Войти
         </button>
       </form>

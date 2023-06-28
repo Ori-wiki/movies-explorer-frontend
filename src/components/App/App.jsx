@@ -57,7 +57,8 @@ function App() {
 
   const [currentUser, setCurrentUset] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [registerErrorText, setregisterErrorText] = useState({});
+  const [registerErrorText, setRegisterErrorText] = useState({});
+  const [loginErrorText, setLoginErrorText] = useState({});
 
   // Auth
 
@@ -69,7 +70,10 @@ function App() {
         setLoggedIn(true);
         navigate('/movies');
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setLoginErrorText(e);
+        console.log(e);
+      });
   };
 
   const handleRegister = ({ email, password, name }) => {
@@ -82,7 +86,7 @@ function App() {
         }
       })
       .catch((e) => {
-        setregisterErrorText(e);
+        setRegisterErrorText(e);
         console.log(e);
       });
   };
@@ -120,7 +124,10 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='/sign-in' element={<Login onLogin={handleLogin} />} />
+          <Route
+            path='/sign-in'
+            element={<Login onLogin={handleLogin} errorText={loginErrorText} />}
+          />
           <Route
             path='/sign-up'
             element={
