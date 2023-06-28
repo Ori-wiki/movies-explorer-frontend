@@ -6,17 +6,19 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-export const register = ({ name, email, password }) => {
+export const register = async ({ name, email, password }) => {
   return fetch(`${MAIN_URL}/signup`, {
     method: 'POST',
-    // credentials: 'include',
+    credentials: 'include',
     headers,
     body: JSON.stringify({
       name,
       email,
       password,
     }),
-  }).then((res) => checkResponse(res));
+  }).then((res) => {
+    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+  });
 };
 
 export const login = ({ email, password }) => {
@@ -28,5 +30,7 @@ export const login = ({ email, password }) => {
       email,
       password,
     }),
-  }).then((res) => checkResponse(res));
+  }).then((res) => {
+    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+  });
 };

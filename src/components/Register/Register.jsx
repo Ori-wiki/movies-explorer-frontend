@@ -1,28 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useFormWithValidation } from '../../hooks/useForm';
+
 import './Register.css';
 
 import Logo from '../Logo/Logo';
 
-function Register({ onRegister }) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  };
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
+function Register({ onRegister, errorText = '' }) {
+  const { values, errors, isValid, handleChange } = useFormWithValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister({ name, email, password });
+    console.log(values);
+    onRegister(values);
   };
 
   return (
@@ -33,19 +23,28 @@ function Register({ onRegister }) {
         <label className='register__label'>
           Имя
           <input
+            minLength={2}
+            maxLength={40}
+            pattern='^[A-Za-zА-Яа-я \-]+$'
             required
             name='name'
             id='name-input'
             placeholder='Имя'
-            minLength={2}
-            maxLength={40}
             type='text'
             className='register__input'
-            value={name || ''}
-            onChange={handleChangeName}
+            value={values.name || ''}
+            onChange={handleChange}
           />
-          <span className='register__input-error'></span>
         </label>
+        <span
+          className={`${
+            errors.name
+              ? 'register__input-error register__input-error_visible'
+              : 'register__input-error'
+          }`}
+        >
+          {errors.name}
+        </span>
         <label className='register__label'>
           E-mail
           <input
@@ -54,11 +53,21 @@ function Register({ onRegister }) {
             placeholder='Email'
             className='register__input'
             type='email'
-            value={email || ''}
-            onChange={handleChangeEmail}
+            minLength={2}
+            maxLength={40}
+            value={values.email || ''}
+            onChange={handleChange}
           ></input>
         </label>
-        <span className='register__input-error'></span>
+        <span
+          className={`${
+            errors.email
+              ? 'register__input-error register__input-error_visible'
+              : 'register__input-error'
+          }`}
+        >
+          {errors.email}
+        </span>
         <label className='register__label'>
           Пароль
           <input
@@ -67,15 +76,43 @@ function Register({ onRegister }) {
             placeholder='Пароль'
             className='register__input'
             type='password'
-            value={password || ''}
-            onChange={handleChangePassword}
+            minLength={8}
+            maxLength={40}
+            value={values.password || ''}
+            onChange={handleChange}
           ></input>
         </label>
-        <span className='register__input-error'>Что-то пошло не так...</span>
-        <button type='submit' className='register__button-submit'>
+        <span
+          className={`${
+            errors.password
+              ? 'register__input-error register__input-error_visible'
+              : 'register__input-error'
+          }`}
+        >
+          {errors.password}
+        </span>
+        <span
+          className={`${
+            errorText.message
+              ? 'register__form-error register__form-error_visible'
+              : 'register__form-error'
+          }`}
+        >
+          {errorText.message}
+        </span>
+        <button
+          type='submit'
+          className={
+            isValid
+              ? 'register__button-submit'
+              : 'register__button-submit register__button-submit_disable'
+          }
+          disabled={!isValid && true}
+        >
           Зарегистрироваться
         </button>
       </form>
+
       <span className='register__text'>
         Уже зарегистрированы?
         <Link className='register__link' to='/sign-in'>

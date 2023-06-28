@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Route, Routes } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './App.css';
@@ -57,29 +57,53 @@ function App() {
 
   const [currentUser, setCurrentUset] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [registerErrorText, setregisterErrorText] = useState({});
 
   // Auth
-
-  const handleRegister = ({ email, password, name }) => {
-    console.log('рега пошла');
-    register({ email, password, name })
-      .then((data) => {
-        if (data) {
-          handleLogin({ email, password });
-        }
-      })
-      .catch((e) => console.log(e));
-  };
 
   const handleLogin = ({ email, password }) => {
     login({ email, password })
       .then((data) => {
-        localStorage.setItem('jwt', data.token);
+        console.log(data);
+        localStorage.setItem('userId', data._id);
         setLoggedIn(true);
         navigate('/movies');
       })
       .catch((e) => console.log(e));
   };
+
+  const handleRegister = ({ email, password, name }) => {
+    console.log('рега пошла');
+    register({ email, password, name })
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          handleLogin({ email, password });
+        }
+      })
+      .catch((e) => {
+        setregisterErrorText(e);
+        console.log(e);
+      });
+  };
+
+  const handleTokenCheck = useCallback(() => {
+    const userID = localStorage.getItem('userId');
+
+    if (userID) {
+      getUserInfo()
+        .then((data) => {
+          setLoggedIn(true);
+          setCurrentUset(data);
+          // navigate('/movies');
+        })
+        .catch((e) => console.log(e));
+    }
+  }, [navigate]);
+
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, [handleTokenCheck]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -99,7 +123,12 @@ function App() {
           <Route path='/sign-in' element={<Login onLogin={handleLogin} />} />
           <Route
             path='/sign-up'
-            element={<Register onRegister={handleRegister} />}
+            element={
+              <Register
+                onRegister={handleRegister}
+                errorText={registerErrorText}
+              />
+            }
           />
           <Route path='/movies' element={<Movies />} />
           <Route path='/saved-movies' element={<SavedMovies />} />

@@ -77,8 +77,13 @@
   text-align: left;
   color: rgba(255, 48, 85, 1);
   opacity: 0;
+  visibility: hidden;
   min-height: 16px;
   transition: 0.3s;
+}
+.login__input-error_visible {
+  opacity: 1;
+  visibility: visible;
 }
 @media screen and (max-width: 425px) {
   .login {
