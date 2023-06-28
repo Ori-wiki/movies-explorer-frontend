@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { useNavigate, Route, Routes } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './App.css';
 
 import Header from '../Header/Header';
@@ -42,9 +43,11 @@ import {
 //   thumbnail: 'https://i.ytimg.com/vi/bjXtYoAfS8g/maxresdefault.jpg',
 //   movieId: 1232,
 // });
-getMovies();
+// getMovies();
 
 function App() {
+  const navigate = useNavigate();
+
   const headerEndpoints = ['/', '/movies', '/saved-movies', '/profile'];
   const footerEndpoints = ['/', '/movies', '/saved-movies'];
 
@@ -52,34 +55,67 @@ function App() {
     name: 'Денис',
   };
 
-  deleteMovie({ _id: '649b0b85d3bb9f8adc16884d' });
+  const [currentUser, setCurrentUset] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  // Auth
+
+  const handleRegister = ({ email, password, name }) => {
+    console.log('рега пошла');
+    register({ email, password, name })
+      .then((data) => {
+        if (data) {
+          handleLogin({ email, password });
+        }
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const handleLogin = ({ email, password }) => {
+    login({ email, password })
+      .then((data) => {
+        localStorage.setItem('jwt', data.token);
+        setLoggedIn(true);
+        navigate('/movies');
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
-    <div className='App'>
-      <Routes>
-        {headerEndpoints.map((path, i) => (
-          <Route path={path} element={<Header loggedIn={true} />} key={i} />
-        ))}
-      </Routes>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className='App'>
+        <Routes>
+          {headerEndpoints.map((path, i) => (
+            <Route
+              path={path}
+              element={<Header loggedIn={loggedIn} />}
+              key={i}
+            />
+          ))}
+        </Routes>
 
-      <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/sign-in' element={<Login />} />
-        <Route path='/sign-up' element={<Register />} />
-        <Route path='/movies' element={<Movies />} />
-        <Route path='/saved-movies' element={<SavedMovies />} />
-        <Route path='/profile' element={<Profile user={user} />} />
-        <Route
-          path='/*'
-          element={<Error message='Страница не найдена' status='404' />}
-        />
-      </Routes>
-      <Routes>
-        {footerEndpoints.map((path, i) => (
-          <Route path={path} element={<Footer />} key={i} />
-        ))}
-      </Routes>
-    </div>
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/sign-in' element={<Login onLogin={handleLogin} />} />
+          <Route
+            path='/sign-up'
+            element={<Register onRegister={handleRegister} />}
+          />
+          <Route path='/movies' element={<Movies />} />
+          <Route path='/saved-movies' element={<SavedMovies />} />
+          <Route path='/profile' element={<Profile user={user} />} />
+          <Route
+            path='/*'
+            element={<Error message='Страница не найдена' status='404' />}
+          />
+        </Routes>
+        <Routes>
+          {footerEndpoints.map((path, i) => (
+            <Route path={path} element={<Footer />} key={i} />
+          ))}
+        </Routes>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

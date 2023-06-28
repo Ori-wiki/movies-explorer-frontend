@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.css';
 
 import Logo from '../Logo/Logo';
 
-function Register() {
+function Register({ onRegister }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+  };
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onRegister({ name, email, password });
+  };
+
   return (
     <section className='register'>
       <Logo />
       <h1 className='register__title'>Добро пожаловать!</h1>
-      <form className='register__form'>
+      <form className='register__form' onSubmit={handleSubmit}>
         <label className='register__label'>
           Имя
           <input
@@ -21,6 +41,8 @@ function Register() {
             maxLength={40}
             type='text'
             className='register__input'
+            value={name || ''}
+            onChange={handleChangeName}
           />
           <span className='register__input-error'></span>
         </label>
@@ -32,6 +54,8 @@ function Register() {
             placeholder='Email'
             className='register__input'
             type='email'
+            value={email || ''}
+            onChange={handleChangeEmail}
           ></input>
         </label>
         <span className='register__input-error'></span>
@@ -43,6 +67,8 @@ function Register() {
             placeholder='Пароль'
             className='register__input'
             type='password'
+            value={password || ''}
+            onChange={handleChangePassword}
           ></input>
         </label>
         <span className='register__input-error'>Что-то пошло не так...</span>

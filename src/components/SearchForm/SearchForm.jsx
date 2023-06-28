@@ -6,9 +6,9 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 function SearchForm({ onSubmit, checkboxClick, checkboxValue }) {
   const [movie, setMovie] = useState('');
 
-  function handleChangeName(e) {
+  const handleChangeName = (e) => {
     setMovie(e.target.value);
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
