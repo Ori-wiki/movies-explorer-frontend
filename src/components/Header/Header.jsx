@@ -10,12 +10,7 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 function Header({ loggedIn = false }) {
   const location = useLocation();
 
-  return !loggedIn ? (
-    <header className='header header_theme_dark'>
-      <Logo />
-      <Navigation loggedIn={loggedIn} />
-    </header>
-  ) : (
+  return loggedIn ? (
     <header
       className={`header header_theme_${
         location.pathname === '/' ? 'dark' : 'light'
@@ -26,6 +21,11 @@ function Header({ loggedIn = false }) {
         <input type='checkbox' className='header__checkbox' />
         <BurgerMenu />
       </label>
+      <Navigation loggedIn={loggedIn} />
+    </header>
+  ) : (
+    <header className='header header_theme_dark'>
+      <Logo />
       <Navigation loggedIn={loggedIn} />
     </header>
   );

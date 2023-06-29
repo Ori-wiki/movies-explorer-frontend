@@ -29,7 +29,6 @@
   grid-area: time;
   margin: 18px 18px 18px 4px;
 }
-
 .movies-card__img {
   grid-area: img;
   width: 360px;
@@ -56,19 +55,21 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-
 .movies-card__button-saved {
   background-image: url(../../images/movies__saved__icon.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-color: rgba(255, 48, 85, 1);
 }
-
 .movies-card__button:hover {
   opacity: 0.7;
   scale: 1.1;
 }
-
+.movies-card__button-saved:hover {
+  opacity: 1;
+  scale: 1;
+  cursor: auto;
+}
 @media screen and (max-width: 896px) {
   .movies-card {
     max-width: 342px;

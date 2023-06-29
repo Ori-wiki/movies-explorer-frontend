@@ -25,7 +25,7 @@ function Register({ onRegister, errorText = '' }) {
           <input
             minLength={2}
             maxLength={40}
-            pattern='^[A-Za-zА-Яа-я \-]+$'
+            pattern='^[A-Za-zА-Яа-яё \-]+$'
             required
             name='name'
             id='name-input'

@@ -13,12 +13,12 @@ import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import Error from '../Error/Error';
 
-import { register, login } from '../../utils/Auth';
+import { register, login, signOut } from '../../utils/Auth';
 import {
   getUserInfo,
   updateUserInfo,
   getMovies,
-  createMovies,
+  createMovie,
   deleteMovie,
 } from '../../utils/MainApi';
 
@@ -41,7 +41,7 @@ import {
 //   nameRU: 'Чужой',
 //   nameEN: 'Alien',
 //   thumbnail: 'https://i.ytimg.com/vi/bjXtYoAfS8g/maxresdefault.jpg',
-//   movieId: 1232,
+//   id: 1232,
 // });
 // getMovies();
 
@@ -51,14 +51,27 @@ function App() {
   const headerEndpoints = ['/', '/movies', '/saved-movies', '/profile'];
   const footerEndpoints = ['/', '/movies', '/saved-movies'];
 
-  const user = {
-    name: 'Денис',
-  };
-
-  const [currentUser, setCurrentUset] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerErrorText, setRegisterErrorText] = useState({});
   const [loginErrorText, setLoginErrorText] = useState({});
+  const [profileUpdateErrorText, setProfileUpdateErrorText] = useState({});
+  const [savedMovies, setSavedMovies] = useState({});
+
+  const handleCreateMovie = (moive) => {
+    createMovie(moive).catch((e) => console.log(e));
+  };
+
+  const handleUpdateProfile = ({ name, email }) => {
+    updateUserInfo({ name, email })
+      .then((data) => {
+        setCurrentUser(data);
+        setProfileUpdateErrorText('');
+      })
+      .catch((e) => {
+        setProfileUpdateErrorText(e);
+      });
+  };
 
   // Auth
 
@@ -66,7 +79,7 @@ function App() {
     login({ email, password })
       .then((data) => {
         console.log(data);
-        localStorage.setItem('userId', data._id);
+        // localStorage.setItem('userId', data._id);
         setLoggedIn(true);
         navigate('/movies');
       })
@@ -77,13 +90,12 @@ function App() {
   };
 
   const handleRegister = ({ email, password, name }) => {
-    console.log('рега пошла');
     register({ email, password, name })
       .then((data) => {
         console.log(data);
-        if (data) {
-          handleLogin({ email, password });
-        }
+        // if (data) {
+        handleLogin({ email, password });
+        // }
       })
       .catch((e) => {
         setRegisterErrorText(e);
@@ -91,24 +103,38 @@ function App() {
       });
   };
 
-  const handleTokenCheck = useCallback(() => {
-    const userID = localStorage.getItem('userId');
+  const handleSingOut = () => {
+    signOut();
+    navigate('/');
+    setLoggedIn(false);
+    setCurrentUser('');
+    localStorage.clear();
+  };
 
-    if (userID) {
-      getUserInfo()
-        .then((data) => {
-          setLoggedIn(true);
-          setCurrentUset(data);
-          // navigate('/movies');
-        })
-        .catch((e) => console.log(e));
-    }
+  useEffect(() => {
+    getUserInfo()
+      .then((res) => {
+        console.log(res);
+        setLoggedIn(true);
+        setCurrentUser(res);
+        navigate({ replace: false });
+      })
+      .catch((e) => {
+        setLoggedIn(false);
+        console.log(e);
+      });
   }, [navigate]);
 
-  React.useEffect(() => {
-    handleTokenCheck();
-  }, [handleTokenCheck]);
-
+  useEffect(() => {
+    getMovies()
+      .then((movies) => {
+        console.log(movies);
+        setSavedMovies(movies);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='App'>
@@ -137,9 +163,29 @@ function App() {
               />
             }
           />
-          <Route path='/movies' element={<Movies />} />
-          <Route path='/saved-movies' element={<SavedMovies />} />
-          <Route path='/profile' element={<Profile user={user} />} />
+          <Route
+            path='/movies'
+            element={
+              <Movies
+                handleCreateMovie={handleCreateMovie}
+                savedMovies={savedMovies}
+              />
+            }
+          />
+          <Route
+            path='/saved-movies'
+            element={<SavedMovies savedMovies={savedMovies} />}
+          />
+          <Route
+            path='/profile'
+            element={
+              <Profile
+                onUpdateProfile={handleUpdateProfile}
+                onSingOut={handleSingOut}
+                errorText={profileUpdateErrorText}
+              />
+            }
+          />
           <Route
             path='/*'
             element={<Error message='Страница не найдена' status='404' />}

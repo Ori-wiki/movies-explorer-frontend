@@ -8,6 +8,7 @@ function MoviesCardList({
   savedMoviesPage = false,
   count,
   shortMoviesCards,
+  handleCreateMovie,
 }) {
   return (
     <section className='movies-card-list'>
@@ -28,6 +29,7 @@ function MoviesCardList({
                 card={card}
                 savedMoviesPage={savedMoviesPage}
                 key={card.id}
+                onCreate={handleCreateMovie}
               />
             ))}
     </section>

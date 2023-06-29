@@ -23,7 +23,9 @@ export const updateUserInfo = ({ name, email }) => {
       name,
       email,
     }),
-  }).then((res) => checkResponse(res));
+  }).then((res) => {
+    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+  });
 };
 //movies
 
@@ -35,19 +37,21 @@ export const getMovies = () => {
   }).then((res) => checkResponse(res));
 };
 
-export const createMovies = ({
+export const createMovie = ({
   country,
   director,
   duration,
   year,
   description,
-  image,
+  image: { url },
   trailerLink,
   nameRU,
   nameEN,
   thumbnail,
-  movieId,
+  id,
 }) => {
+  console.log(typeof year);
+  const image = url;
   return fetch(`${MAIN_URL}/movies`, {
     method: 'POST',
     credentials: 'include',
@@ -63,7 +67,7 @@ export const createMovies = ({
       nameRU,
       nameEN,
       thumbnail,
-      movieId,
+      id,
     }),
   }).then((res) => checkResponse(res));
 };

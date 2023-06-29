@@ -10,7 +10,7 @@ import { filterMovies, filterShortMovies } from '../../utils/utils';
 
 import { deviceParams } from '../../utils/constants';
 
-function Movies() {
+function Movies({ handleCreateMovie }) {
   const { laptop, tablet, mobile } = deviceParams;
   const [width, setWidth] = useState(window.innerWidth);
   const [count, setCount] = useState(0);
@@ -178,6 +178,7 @@ function Movies() {
             </h3>
           ) : (
             <MoviesCardList
+              handleCreateMovie={handleCreateMovie}
               savedMoviesPage={false}
               moviesCards={moviesCards}
               count={count + total}
