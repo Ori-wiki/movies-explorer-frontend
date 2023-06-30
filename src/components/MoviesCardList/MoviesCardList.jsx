@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList({
-  moviesCards,
+  moviesCards = [],
   savedMoviesPage = false,
   count,
   shortMoviesCards,
   handleCreateMovie,
+  savedMovies = [],
 }) {
+  const getSavedCard = (savedMovies, card) => {
+    return savedMovies.find((savedMovie) => savedMovie.id === card.id);
+  };
+
   return (
     <section className='movies-card-list'>
       {shortMoviesCards.length !== 0
@@ -20,6 +25,8 @@ function MoviesCardList({
                 card={card}
                 savedMoviesPage={savedMoviesPage}
                 key={card.id}
+                onCreate={handleCreateMovie}
+                saved={getSavedCard(savedMovies, card)}
               />
             ))
         : moviesCards
@@ -30,6 +37,7 @@ function MoviesCardList({
                 savedMoviesPage={savedMoviesPage}
                 key={card.id}
                 onCreate={handleCreateMovie}
+                saved={getSavedCard(savedMovies, card)}
               />
             ))}
     </section>

@@ -56,10 +56,24 @@ function App() {
   const [registerErrorText, setRegisterErrorText] = useState({});
   const [loginErrorText, setLoginErrorText] = useState({});
   const [profileUpdateErrorText, setProfileUpdateErrorText] = useState({});
-  const [savedMovies, setSavedMovies] = useState({});
+  const [savedMovies, setSavedMovies] = useState([]);
+
+  const updateSavedMovies = (movies) => {
+    const savedMovies = movies.map((card) => ({ ...card, isSaved: true }));
+
+    setSavedMovies(savedMovies);
+    localStorage.setItem('saved_movies', JSON.stringify(savedMovies));
+  };
 
   const handleCreateMovie = (moive) => {
-    createMovie(moive).catch((e) => console.log(e));
+    createMovie(moive)
+      .then((res) => {
+        const newSavedMovies = [res, ...savedMovies];
+        console.log(newSavedMovies);
+        updateSavedMovies(newSavedMovies);
+      })
+
+      .catch((e) => console.log(e));
   };
 
   const handleUpdateProfile = ({ name, email }) => {
@@ -79,7 +93,6 @@ function App() {
     login({ email, password })
       .then((data) => {
         console.log(data);
-        // localStorage.setItem('userId', data._id);
         setLoggedIn(true);
         navigate('/movies');
       })
@@ -114,7 +127,6 @@ function App() {
   useEffect(() => {
     getUserInfo()
       .then((res) => {
-        console.log(res);
         setLoggedIn(true);
         setCurrentUser(res);
         navigate({ replace: false });
@@ -128,8 +140,8 @@ function App() {
   useEffect(() => {
     getMovies()
       .then((movies) => {
-        console.log(movies);
-        setSavedMovies(movies);
+        // console.log({ movies });
+        updateSavedMovies(movies);
       })
       .catch((e) => {
         console.log(e);

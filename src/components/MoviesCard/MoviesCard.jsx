@@ -4,12 +4,14 @@ import './MoviesCard.css';
 
 import { transformTime } from '../../utils/utils';
 
-function MoviesCard({ card, savedMoviesPage = false, onCreate = false }) {
-  const [saved, setSaved] = useState(false);
-
+function MoviesCard({
+  card,
+  savedMoviesPage = false,
+  onCreate = false,
+  saved,
+}) {
   const handleCreate = () => {
     onCreate(card);
-    setSaved(true);
   };
 
   return (

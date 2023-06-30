@@ -11,6 +11,7 @@
 }
 .movies-card__title {
   max-width: 240px;
+  min-height: 36px;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 15px;
   font-weight: 500;

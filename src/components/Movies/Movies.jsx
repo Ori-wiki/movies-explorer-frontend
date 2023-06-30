@@ -6,11 +6,12 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
 import { getMovies } from '../../utils/MoviesApi';
+
 import { filterMovies, filterShortMovies } from '../../utils/utils';
 
 import { deviceParams } from '../../utils/constants';
 
-function Movies({ handleCreateMovie }) {
+function Movies({ handleCreateMovie, savedMovies }) {
   const { laptop, tablet, mobile } = deviceParams;
   const [width, setWidth] = useState(window.innerWidth);
   const [count, setCount] = useState(0);
@@ -25,34 +26,6 @@ function Movies({ handleCreateMovie }) {
   const [isError, setIsError] = useState(false);
   const [notFound, setNotFound] = useState(false);
   const [checkboxValue, setcheckboxValue] = useState(false);
-
-  useEffect(() => {
-    if (!localStorage.getItem('movies')) {
-      setTotal(
-        width >= laptop.width
-          ? laptop.cards.total
-          : width >= tablet.width
-          ? tablet.cards.total
-          : mobile.cards.total
-      );
-    }
-    setStep(
-      width >= laptop.width
-        ? laptop.cards.step
-        : width >= tablet.width
-        ? tablet.cards.step
-        : mobile.cards.step
-    );
-    localStorage.setItem('total', total);
-  }, [width, laptop, tablet, mobile, total]);
-
-  useEffect(() => {
-    window.onresize = () => {
-      setTimeout(() => {
-        setWidth(window.innerWidth);
-      }, 700);
-    };
-  }, []);
 
   const handleSetMovies = (res, movie) => {
     const movies = filterMovies(res, movie);
@@ -119,6 +92,34 @@ function Movies({ handleCreateMovie }) {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem('movies')) {
+      setTotal(
+        width >= laptop.width
+          ? laptop.cards.total
+          : width >= tablet.width
+          ? tablet.cards.total
+          : mobile.cards.total
+      );
+    }
+    setStep(
+      width >= laptop.width
+        ? laptop.cards.step
+        : width >= tablet.width
+        ? tablet.cards.step
+        : mobile.cards.step
+    );
+    localStorage.setItem('total', total);
+  }, [width, laptop, tablet, mobile, total]);
+
+  useEffect(() => {
+    window.onresize = () => {
+      setTimeout(() => {
+        setWidth(window.innerWidth);
+      }, 700);
+    };
+  }, []);
+
+  useEffect(() => {
     if (localStorage.getItem('shortMovies')) {
       const shortList = JSON.parse(localStorage.getItem('shortMovies'));
       if (shortList.length === 0) {
@@ -127,15 +128,8 @@ function Movies({ handleCreateMovie }) {
         setNotFound(false);
         setShortMoviesCards(shortList);
       }
-    } else if (localStorage.getItem('movies')) {
-      const list = JSON.parse(localStorage.getItem('movies'));
-      if (list.length === 0) {
-        setNotFound(true);
-      } else {
-        setNotFound(false);
-        setMoviesCards(list);
-      }
     }
+
     if (localStorage.getItem('movies')) {
       const list = JSON.parse(localStorage.getItem('movies'));
       if (list.length === 0) {
@@ -183,6 +177,7 @@ function Movies({ handleCreateMovie }) {
               moviesCards={moviesCards}
               count={count + total}
               shortMoviesCards={shortMoviesCards}
+              savedMovies={savedMovies}
             />
           )}
 
