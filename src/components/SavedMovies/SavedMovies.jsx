@@ -6,7 +6,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 import { filterMovies, filterShortMovies } from '../../utils/utils';
 
-function SavedMovies({ onClick, savedMovies, isError }) {
+function SavedMovies({ onDelete, savedMovies, isError }) {
   const [notFound, setNotFound] = useState(false);
   const [checkboxValue, setcheckboxValue] = useState(false);
   const [moviesCards, setMoviesCards] = useState([]);
@@ -74,7 +74,7 @@ function SavedMovies({ onClick, savedMovies, isError }) {
           </h3>
         ) : (
           <MoviesCardList
-            onClick={onClick}
+            onDelete={onDelete}
             savedMoviesPage={true}
             moviesCards={moviesCards}
             count={savedMovies.length}

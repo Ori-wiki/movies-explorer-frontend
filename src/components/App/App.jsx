@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Route, Routes } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
@@ -31,12 +31,27 @@ function App() {
   const footerEndpoints = ['/', '/movies', '/saved-movies'];
 
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [registerErrorText, setRegisterErrorText] = useState({});
   const [loginErrorText, setLoginErrorText] = useState({});
   const [savedMoviesErrorText, setSavedMoviesErrorText] = useState(false);
   const [profileUpdateErrorText, setProfileUpdateErrorText] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
+
+  // если приходит ответ с сервера,
+  // то авторизациноое куки передаются успешно
+  useEffect(() => {
+    getUserInfo()
+      .then((res) => {
+        setLoggedIn(true);
+        setCurrentUser(res);
+        navigate({ replace: false });
+      })
+      .catch((e) => {
+        setLoggedIn(false);
+        console.log(e);
+      });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const updateSavedMovies = (movies) => {
     const savedMovies = movies.map((card) => ({ ...card, isSaved: true }));
@@ -48,7 +63,7 @@ function App() {
     createMovie(movie)
       .then((res) => {
         const newSavedMovies = [res, ...savedMovies];
-        console.log(newSavedMovies);
+        // console.log(newSavedMovies);
         updateSavedMovies(newSavedMovies);
       })
 
@@ -56,13 +71,18 @@ function App() {
   };
 
   const handleDeleteMovie = (movie) => {
-    deleteMovie(movie._id)
+    const savedMovie = savedMovies.find((item) => {
+      console.log(item);
+      if (item.id === movie.id) {
+        return item;
+      } else {
+        return false;
+      }
+    });
+    deleteMovie(savedMovie._id)
       .then((res) => {
-        console.log(res);
-        const newMoviesList = savedMovies.filter((m) => {
-          console.log(movie);
-          console.log(m);
-          if (movie.id === m.id || movie.id === m.id) {
+        const newMoviesList = savedMovies.filter((film) => {
+          if (movie.id === film.id) {
             return false;
           } else {
             return true;
@@ -120,26 +140,13 @@ function App() {
     setCurrentUser('');
     localStorage.clear();
   };
-  // если приходит ответ с сервера,
-  // то авторизациноое куки передаются успешно
-  useEffect(() => {
-    getUserInfo()
-      .then((res) => {
-        setLoggedIn(true);
-        setCurrentUser(res);
-        navigate({ replace: false });
-      })
-      .catch((e) => {
-        setLoggedIn(false);
-        console.log(e);
-      });
-  }, [navigate]);
 
   useEffect(() => {
     if (loggedIn) {
       getSavedMovies()
         .then((movies) => {
           updateSavedMovies(movies);
+          setSavedMoviesErrorText('');
         })
         .catch((e) => {
           setSavedMoviesErrorText(e);
@@ -182,7 +189,8 @@ function App() {
               <ProtectedRoute
                 loggedIn={loggedIn}
                 element={Movies}
-                onClick={handleCreateMovie}
+                onSave={handleCreateMovie}
+                onDelete={handleDeleteMovie}
                 savedMovies={savedMovies}
               />
             }
@@ -193,7 +201,7 @@ function App() {
               <ProtectedRoute
                 loggedIn={loggedIn}
                 element={SavedMovies}
-                onClick={handleDeleteMovie}
+                onDelete={handleDeleteMovie}
                 savedMovies={savedMovies}
                 isError={savedMoviesErrorText}
               />

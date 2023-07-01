@@ -1,26 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import './SearchForm.css';
+
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import { useFormWithValidation } from '../../hooks/useForm';
 
 function SearchForm({ onSubmit, checkboxClick, checkboxValue }) {
-  const [movie, setMovie] = useState('');
+  const { values, errors, isValid, handleChange } = useFormWithValidation();
+  const location = useLocation();
 
-  const handleChangeName = (e) => {
-    setMovie(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-
-    onSubmit(movie);
-  };
+    onSubmit(values.movie);
+  }
   useEffect(() => {
-    if (localStorage.getItem('movieSearch')) {
+    if (
+      location.pathname === '/movies' &&
+      localStorage.getItem('movieSearch')
+    ) {
       const movieValue = localStorage.getItem('movieSearch');
-      setMovie(movieValue);
+      values.movie = movieValue;
     }
-  }, []);
+  }, [location]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section className='search-form'>
@@ -37,12 +39,28 @@ function SearchForm({ onSubmit, checkboxClick, checkboxValue }) {
           name='movie'
           id='movies-input'
           placeholder='Фильм'
-          value={movie || ''}
-          onChange={handleChangeName}
+          value={values.movie || ''}
+          onChange={handleChange}
         />
-        <button type='submit' className='search-form__button-submit'></button>
+        <button
+          type='submit'
+          className={
+            isValid
+              ? 'search-form__button-submit'
+              : 'search-form__button-submit search-form__button-submit_disable'
+          }
+          disabled={!isValid && true}
+        ></button>
       </form>
-      <span className='search-form__input-error'>sssdsdsss</span>
+      <span
+        className={`${
+          errors.movie
+            ? 'search-form__input-error search-form__input-error_visable'
+            : 'search-form__input-error'
+        }`}
+      >
+        Нужно ввести ключевое слово
+      </span>
       <FilterCheckbox
         checkboxClick={checkboxClick}
         checkboxValue={checkboxValue}

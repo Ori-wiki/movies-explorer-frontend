@@ -50,7 +50,6 @@ export const createMovie = ({
   thumbnail,
   id,
 }) => {
-  console.log(typeof year);
   const image = url;
   return fetch(`${MAIN_URL}/movies`, {
     method: 'POST',

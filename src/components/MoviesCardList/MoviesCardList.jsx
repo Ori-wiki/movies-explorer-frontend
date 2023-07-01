@@ -8,7 +8,8 @@ function MoviesCardList({
   savedMoviesPage = false,
   count,
   shortMoviesCards,
-  onClick,
+  onSave = false,
+  onDelete = false,
   savedMovies = [],
 }) {
   const getSavedCard = (savedMovies, card) => {
@@ -25,7 +26,8 @@ function MoviesCardList({
                 card={card}
                 savedMoviesPage={savedMoviesPage}
                 key={card.id}
-                onClick={onClick}
+                onSave={onSave}
+                onDelete={onDelete}
                 saved={getSavedCard(savedMovies, card)}
               />
             ))
@@ -36,7 +38,8 @@ function MoviesCardList({
                 card={card}
                 savedMoviesPage={savedMoviesPage}
                 key={card.id}
-                onClick={onClick}
+                onSave={onSave}
+                onDelete={onDelete}
                 saved={getSavedCard(savedMovies, card)}
               />
             ))}
