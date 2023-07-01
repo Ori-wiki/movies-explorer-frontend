@@ -29,7 +29,7 @@ export const updateUserInfo = ({ name, email }) => {
 };
 //movies
 
-export const getMovies = () => {
+export const getSavedMovies = () => {
   return fetch(`${MAIN_URL}/movies`, {
     method: 'GET',
     credentials: 'include',
@@ -72,7 +72,7 @@ export const createMovie = ({
   }).then((res) => checkResponse(res));
 };
 
-export const deleteMovie = ({ _id }) => {
+export const deleteMovie = ( _id ) => {
   return fetch(`${MAIN_URL}/movies/${_id}`, {
     method: 'DELETE',
     credentials: 'include',

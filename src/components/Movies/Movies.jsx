@@ -11,7 +11,7 @@ import { filterMovies, filterShortMovies } from '../../utils/utils';
 
 import { deviceParams } from '../../utils/constants';
 
-function Movies({ handleCreateMovie, savedMovies }) {
+function Movies({ onClick, savedMovies }) {
   const { laptop, tablet, mobile } = deviceParams;
   const [width, setWidth] = useState(window.innerWidth);
   const [count, setCount] = useState(0);
@@ -150,7 +150,7 @@ function Movies({ handleCreateMovie, savedMovies }) {
       setcheckboxValue(check);
     }
   }, []);
-
+  console.log(savedMovies);
   return (
     <section className='movies'>
       <SearchForm
@@ -172,7 +172,7 @@ function Movies({ handleCreateMovie, savedMovies }) {
             </h3>
           ) : (
             <MoviesCardList
-              handleCreateMovie={handleCreateMovie}
+              onClick={onClick}
               savedMoviesPage={false}
               moviesCards={moviesCards}
               count={count + total}

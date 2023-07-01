@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
@@ -8,7 +8,7 @@ function MoviesCardList({
   savedMoviesPage = false,
   count,
   shortMoviesCards,
-  handleCreateMovie,
+  onClick,
   savedMovies = [],
 }) {
   const getSavedCard = (savedMovies, card) => {
@@ -25,7 +25,7 @@ function MoviesCardList({
                 card={card}
                 savedMoviesPage={savedMoviesPage}
                 key={card.id}
-                onCreate={handleCreateMovie}
+                onClick={onClick}
                 saved={getSavedCard(savedMovies, card)}
               />
             ))
@@ -36,7 +36,7 @@ function MoviesCardList({
                 card={card}
                 savedMoviesPage={savedMoviesPage}
                 key={card.id}
-                onCreate={handleCreateMovie}
+                onClick={onClick}
                 saved={getSavedCard(savedMovies, card)}
               />
             ))}

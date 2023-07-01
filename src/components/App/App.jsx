@@ -17,33 +17,10 @@ import { register, login, signOut } from '../../utils/Auth';
 import {
   getUserInfo,
   updateUserInfo,
-  getMovies,
+  getSavedMovies,
   createMovie,
   deleteMovie,
 } from '../../utils/MainApi';
-
-// register({
-//   name: 'Денdsdsdиdssdsс',
-//   email: 'dendddsdfss-akov-95@mail.ru',
-//   password: 'zxczxczxc',
-// });
-
-// login({ email: 'igor@gmail.com', password: 'zxczxczxc' });
-// updateUserInfo({ name: 'НАСТЯ', email: 'igor@gmail.com' });
-// createMovies({
-//   country: 'Fidnc',
-//   director: 'Fincher',
-//   duration: 1800,
-//   year: '1984',
-//   description: 'qqqqqqqqqqqqqqqqqq',
-//   image: 'https://media.filmz.ru/photos/full/filmz.ru_f_32492.jpg',
-//   trailerLink: 'https://www.youtube.com/watch?v=YA6rUpVFKv8',
-//   nameRU: 'Чужой',
-//   nameEN: 'Alien',
-//   thumbnail: 'https://i.ytimg.com/vi/bjXtYoAfS8g/maxresdefault.jpg',
-//   id: 1232,
-// });
-// getMovies();
 
 function App() {
   const navigate = useNavigate();
@@ -55,24 +32,42 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerErrorText, setRegisterErrorText] = useState({});
   const [loginErrorText, setLoginErrorText] = useState({});
+  const [savedMoviesErrorText, setSavedMoviesErrorText] = useState(false);
   const [profileUpdateErrorText, setProfileUpdateErrorText] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
 
   const updateSavedMovies = (movies) => {
     const savedMovies = movies.map((card) => ({ ...card, isSaved: true }));
-
     setSavedMovies(savedMovies);
-    localStorage.setItem('saved_movies', JSON.stringify(savedMovies));
+    // localStorage.setItem('saved_movies', JSON.stringify(savedMovies));
   };
 
-  const handleCreateMovie = (moive) => {
-    createMovie(moive)
+  const handleCreateMovie = (movie) => {
+    createMovie(movie)
       .then((res) => {
         const newSavedMovies = [res, ...savedMovies];
         console.log(newSavedMovies);
         updateSavedMovies(newSavedMovies);
       })
 
+      .catch((e) => console.log(e));
+  };
+
+  const handleDeleteMovie = (movie) => {
+    deleteMovie(movie._id)
+      .then((res) => {
+        console.log(res);
+        const newMoviesList = savedMovies.filter((m) => {
+          console.log(movie);
+          console.log(m);
+          if (movie.id === m.id || movie.id === m.id) {
+            return false;
+          } else {
+            return true;
+          }
+        });
+        setSavedMovies(newMoviesList);
+      })
       .catch((e) => console.log(e));
   };
 
@@ -123,7 +118,8 @@ function App() {
     setCurrentUser('');
     localStorage.clear();
   };
-
+  // если приходит ответ с сервера,
+  // то авторизациноое куки передаются успешно
   useEffect(() => {
     getUserInfo()
       .then((res) => {
@@ -138,15 +134,18 @@ function App() {
   }, [navigate]);
 
   useEffect(() => {
-    getMovies()
-      .then((movies) => {
-        // console.log({ movies });
-        updateSavedMovies(movies);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+    if (loggedIn) {
+      getSavedMovies()
+        .then((movies) => {
+          updateSavedMovies(movies);
+        })
+        .catch((e) => {
+          setSavedMoviesErrorText(e);
+          console.log(e);
+        });
+    }
+  }, [loggedIn]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='App'>
@@ -176,18 +175,22 @@ function App() {
             }
           />
           <Route
-            path='/movies'
+            path='/saved-movies'
             element={
-              <Movies
-                handleCreateMovie={handleCreateMovie}
+              <SavedMovies
+                onClick={handleDeleteMovie}
                 savedMovies={savedMovies}
+                isError={savedMoviesErrorText}
               />
             }
           />
           <Route
-            path='/saved-movies'
-            element={<SavedMovies savedMovies={savedMovies} />}
+            path='/movies'
+            element={
+              <Movies onClick={handleCreateMovie} savedMovies={savedMovies} />
+            }
           />
+
           <Route
             path='/profile'
             element={

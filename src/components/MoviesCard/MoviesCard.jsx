@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './MoviesCard.css';
 
 import { transformTime } from '../../utils/utils';
 
-function MoviesCard({
-  card,
-  savedMoviesPage = false,
-  onCreate = false,
-  saved,
-}) {
-  const handleCreate = () => {
-    onCreate(card);
+function MoviesCard({ card, savedMoviesPage = false, onClick = false, saved }) {
+  const handleClick = () => {
+    onClick(card);
   };
 
   return (
@@ -21,13 +16,16 @@ function MoviesCard({
       <img
         className='movies-card__img'
         alt='фильм'
-        src={`https://api.nomoreparties.co${card.image.url}`}
+        src={`https://api.nomoreparties.co${card.image.url || card.image}`}
       />
       {savedMoviesPage ? (
-        <button className='movies-card__button movies-card__button-delete'></button>
+        <button
+          onClick={handleClick}
+          className='movies-card__button movies-card__button-delete'
+        ></button>
       ) : (
         <button
-          onClick={handleCreate}
+          onClick={handleClick}
           className={
             saved
               ? 'movies-card__button movies-card__button-saved'
