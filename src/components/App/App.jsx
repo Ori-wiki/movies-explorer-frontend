@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Route, Routes } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
 import './App.css';
 
 import Header from '../Header/Header';
@@ -12,6 +13,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import Error from '../Error/Error';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import { register, login, signOut } from '../../utils/Auth';
 import {
@@ -175,9 +177,22 @@ function App() {
             }
           />
           <Route
+            path='/movies'
+            element={
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                element={Movies}
+                onClick={handleCreateMovie}
+                savedMovies={savedMovies}
+              />
+            }
+          />
+          <Route
             path='/saved-movies'
             element={
-              <SavedMovies
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                element={SavedMovies}
                 onClick={handleDeleteMovie}
                 savedMovies={savedMovies}
                 isError={savedMoviesErrorText}
@@ -185,16 +200,11 @@ function App() {
             }
           />
           <Route
-            path='/movies'
-            element={
-              <Movies onClick={handleCreateMovie} savedMovies={savedMovies} />
-            }
-          />
-
-          <Route
             path='/profile'
             element={
-              <Profile
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                element={Profile}
                 onUpdateProfile={handleUpdateProfile}
                 onSingOut={handleSingOut}
                 errorText={profileUpdateErrorText}
