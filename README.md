@@ -5,6 +5,12 @@ https://disk.yandex.ru/d/JyN4jYHJ4OAFTA
 
 # Ссылка на pull-req 3
 https://github.com/Ori-wiki/movies-explorer-frontend/pull/3
+
+# backend
+https://api.muda.nomoredomains.rocks
+# frontend
+https://muda.nomoredomains.rocks
+# Ссылка на pull-req 3
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
