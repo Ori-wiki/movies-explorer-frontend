@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormWithValidation } from '../../hooks/useForm';
 
@@ -11,7 +11,6 @@ function Register({ onRegister, errorText = '' }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
     onRegister(values);
   };
 

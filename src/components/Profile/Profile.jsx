@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useFormWithValidation } from '../../hooks/useForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -11,9 +11,10 @@ function Profile({ onSingOut, onUpdateProfile, errorText = {} }) {
 
   const { values, errors, isValid, handleChange, resetForm, setValues } =
     useFormWithValidation();
+  // useCallback(() => {});
   const currentUser = useContext(CurrentUserContext);
-
   useEffect(() => {
+    console.log(currentUser);
     if (currentUser) {
       resetForm();
       setValues({
@@ -29,12 +30,10 @@ function Profile({ onSingOut, onUpdateProfile, errorText = {} }) {
     setSaveChanged(false);
   };
   const handleChangeData = (e) => {
-    console.log(values.name);
     if (
       values.name === currentUser.name &&
       values.email === currentUser.email
     ) {
-      console.log('qwe');
       setProfileErrorText({
         message: 'Имя и email совпадают с предыдущими значениями',
       });
@@ -44,7 +43,6 @@ function Profile({ onSingOut, onUpdateProfile, errorText = {} }) {
       setProfileErrorText({ message: '' });
     }
   };
-  console.log(errorText);
   return (
     <section className='profile'>
       <h1 className='profile__title'>Привет, {currentUser.name}!</h1>

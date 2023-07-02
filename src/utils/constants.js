@@ -16,11 +16,14 @@ export const deviceParams = {
   mobile: {
     width: 320,
     cards: {
-      total: 1,
-      step: 1,
+      total: 5,
+      step: 2,
     },
   },
 };
+
+export const headerEndpoints = ['/', '/movies', '/saved-movies', '/profile'];
+export const footerEndpoints = ['/', '/movies', '/saved-movies'];
 
 export const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 export const MAIN_URL = 'http://localhost:3000';

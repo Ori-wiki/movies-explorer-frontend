@@ -24,11 +24,10 @@ import {
   deleteMovie,
 } from '../../utils/MainApi';
 
+import { headerEndpoints, footerEndpoints } from '../../utils/constants';
+
 function App() {
   const navigate = useNavigate();
-
-  const headerEndpoints = ['/', '/movies', '/saved-movies', '/profile'];
-  const footerEndpoints = ['/', '/movies', '/saved-movies'];
 
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(true);
@@ -51,19 +50,17 @@ function App() {
         setLoggedIn(false);
         console.log(e);
       });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [loggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const updateSavedMovies = (movies) => {
     const savedMovies = movies.map((card) => ({ ...card, isSaved: true }));
     setSavedMovies(savedMovies);
-    // localStorage.setItem('saved_movies', JSON.stringify(savedMovies));
   };
 
   const handleCreateMovie = (movie) => {
     createMovie(movie)
       .then((res) => {
         const newSavedMovies = [res, ...savedMovies];
-        // console.log(newSavedMovies);
         updateSavedMovies(newSavedMovies);
       })
 
@@ -72,7 +69,6 @@ function App() {
 
   const handleDeleteMovie = (movie) => {
     const savedMovie = savedMovies.find((item) => {
-      console.log(item);
       if (item.id === movie.id) {
         return item;
       } else {
@@ -108,8 +104,7 @@ function App() {
 
   const handleLogin = ({ email, password }) => {
     login({ email, password })
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         setLoggedIn(true);
         navigate('/movies');
       })
@@ -122,10 +117,9 @@ function App() {
   const handleRegister = ({ email, password, name }) => {
     register({ email, password, name })
       .then((data) => {
-        console.log(data);
-        // if (data) {
-        handleLogin({ email, password });
-        // }
+        if (data) {
+          handleLogin({ email, password });
+        }
       })
       .catch((e) => {
         setRegisterErrorText(e);

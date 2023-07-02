@@ -150,7 +150,6 @@ function Movies({ onSave, onDelete, savedMovies }) {
       setcheckboxValue(check);
     }
   }, []);
-  console.log(savedMovies);
   return (
     <section className='movies'>
       <SearchForm

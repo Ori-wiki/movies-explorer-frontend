@@ -13,16 +13,12 @@ function SavedMovies({ onDelete, savedMovies, isError }) {
   const [shortMoviesCards, setShortMoviesCards] = useState([]);
 
   useEffect(() => {
-    console.log('пиво');
     setMoviesCards(savedMovies);
   }, [savedMovies]);
 
-  console.log(savedMovies);
   const handleSubmit = (movie) => {
-    console.log(savedMovies + movie);
     localStorage.setItem('savedMovieSearch', movie);
     const movies = filterMovies(savedMovies, movie);
-    console.log(movies);
     movies.length === 0 ? setNotFound(true) : setNotFound(false);
     setMoviesCards(movies);
     localStorage.setItem('savedMovies', JSON.stringify(movies));
@@ -52,9 +48,6 @@ function SavedMovies({ onDelete, savedMovies, isError }) {
       }
     }
   };
-  // useEffect(() => {
-  //   setMoviesCards(savedMovies);
-  // }, [savedMovies]);
 
   return (
     <section className='saved-movies'>
