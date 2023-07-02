@@ -80,6 +80,12 @@
     display: block;
     margin: 159px 0 28px 0;
   }
+  .header__link_signup {
+    color: rgba(255, 255, 255, 1) !important;
+  }
+  .header__link_signin {
+    color: rgba(255, 255, 255, 1) !important;
+  }
 }
 
 @media screen and (max-width: 425px) {

@@ -36,7 +36,7 @@ function App() {
   const [savedMoviesErrorText, setSavedMoviesErrorText] = useState(false);
   const [profileUpdateErrorText, setProfileUpdateErrorText] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
-
+  const [isDataLoad, setIsDataLoad] = useState(false);
   // если приходит ответ с сервера,
   // то авторизациноое куки передаются успешно
   useEffect(() => {
@@ -103,6 +103,7 @@ function App() {
   // Auth
 
   const handleLogin = ({ email, password }) => {
+    setIsDataLoad(true);
     login({ email, password })
       .then(() => {
         setLoggedIn(true);
@@ -111,10 +112,14 @@ function App() {
       .catch((e) => {
         setLoginErrorText(e);
         console.log(e);
+      })
+      .finally(() => {
+        setIsDataLoad(false);
       });
   };
 
   const handleRegister = ({ email, password, name }) => {
+    setIsDataLoad(true);
     register({ email, password, name })
       .then((data) => {
         if (data) {
@@ -124,6 +129,9 @@ function App() {
       .catch((e) => {
         setRegisterErrorText(e);
         console.log(e);
+      })
+      .finally(() => {
+        setIsDataLoad(false);
       });
   };
 
@@ -166,7 +174,13 @@ function App() {
           <Route path='/' element={<Main />} />
           <Route
             path='/sign-in'
-            element={<Login onLogin={handleLogin} errorText={loginErrorText} />}
+            element={
+              <Login
+                onLogin={handleLogin}
+                errorText={loginErrorText}
+                isDataLoad={isDataLoad}
+              />
+            }
           />
           <Route
             path='/sign-up'
@@ -174,6 +188,7 @@ function App() {
               <Register
                 onRegister={handleRegister}
                 errorText={registerErrorText}
+                isDataLoad={isDataLoad}
               />
             }
           />
