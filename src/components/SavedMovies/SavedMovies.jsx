@@ -30,7 +30,6 @@ function SavedMovies({ onDelete, savedMovies, isError }) {
   };
   const handleShortFilms = () => {
     setcheckboxValue(!checkboxValue);
-    localStorage.setItem('checkboxValue', !checkboxValue);
     if (!checkboxValue) {
       const shortMovies = filterShortMovies(moviesCards);
       if (shortMovies.length === 0) {
