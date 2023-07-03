@@ -1,3 +1,5 @@
+import { SHORTMOVIES_DURATION } from "./constants";
+
 function endingOfNum(n, textForms) {
   n = Math.abs(n) % 100;
   let n1 = n % 10;
@@ -47,5 +49,5 @@ export const filterMovies = (movies, query) => {
 };
 
 export const filterShortMovies = (movies) => {
-  return movies.filter((movie) => movie.duration < 40);
+  return movies.filter((movie) => movie.duration < SHORTMOVIES_DURATION);
 };

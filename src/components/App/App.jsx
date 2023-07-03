@@ -24,7 +24,7 @@ import {
   deleteMovie,
 } from '../../utils/MainApi';
 
-import { headerEndpoints, footerEndpoints } from '../../utils/constants';
+import { HEADER_ENDPOINTS, FOOTER_ENDPOINTS } from '../../utils/constants';
 
 function App() {
   const navigate = useNavigate();
@@ -161,7 +161,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='App'>
         <Routes>
-          {headerEndpoints.map((path, i) => (
+          {HEADER_ENDPOINTS.map((path, i) => (
             <Route
               path={path}
               element={<Header loggedIn={loggedIn} />}
@@ -234,7 +234,7 @@ function App() {
           />
         </Routes>
         <Routes>
-          {footerEndpoints.map((path, i) => (
+          {FOOTER_ENDPOINTS.map((path, i) => (
             <Route path={path} element={<Footer />} key={i} />
           ))}
         </Routes>

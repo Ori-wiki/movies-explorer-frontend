@@ -9,10 +9,10 @@ import { getMovies } from '../../utils/MoviesApi';
 
 import { filterMovies, filterShortMovies } from '../../utils/utils';
 
-import { deviceParams } from '../../utils/constants';
+import { DEVICE_PARAMS } from '../../utils/constants';
 
 function Movies({ onSave, onDelete, savedMovies }) {
-  const { laptop, tablet, mobile } = deviceParams;
+  const { laptop, tablet, mobile } = DEVICE_PARAMS;
   const [width, setWidth] = useState(window.innerWidth);
   const [count, setCount] = useState(0);
   const [total, setTotal] = useState(
