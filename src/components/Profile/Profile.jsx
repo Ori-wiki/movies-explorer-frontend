@@ -11,7 +11,7 @@ function Profile({ onSingOut, onUpdateProfile, errorText = {} }) {
 
   const { values, errors, isValid, handleChange, resetForm, setValues } =
     useFormWithValidation();
-  // useCallback(() => {});
+
   const currentUser = useContext(CurrentUserContext);
   useEffect(() => {
     console.log(currentUser);
@@ -29,6 +29,7 @@ function Profile({ onSingOut, onUpdateProfile, errorText = {} }) {
     onUpdateProfile(values);
     setSaveChanged(false);
   };
+
   const handleChangeData = (e) => {
     if (
       values.name === currentUser.name &&
@@ -125,6 +126,7 @@ function Profile({ onSingOut, onUpdateProfile, errorText = {} }) {
         ) : (
           <button
             onClick={handleChangeData}
+            type='button'
             className={
               isValid
                 ? 'profile__button profile__button-submit'
