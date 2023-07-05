@@ -14,7 +14,6 @@ function Profile({ onSingOut, onUpdateProfile, errorText = {} }) {
 
   const currentUser = useContext(CurrentUserContext);
   useEffect(() => {
-    console.log(currentUser);
     if (currentUser) {
       resetForm();
       setValues({

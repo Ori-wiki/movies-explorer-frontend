@@ -13,6 +13,8 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import Error from '../Error/Error';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import { register, login, signOut } from '../../utils/Auth';
@@ -37,6 +39,12 @@ function App() {
   const [profileUpdateErrorText, setProfileUpdateErrorText] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
   const [isDataLoad, setIsDataLoad] = useState(false);
+  const [isInfoTooltip, setIsInfoTooltip] = useState({
+    isOpen: false,
+    successful: true,
+    text: '',
+  });
+
   // если приходит ответ с сервера,
   // то авторизациноое куки передаются успешно
   useEffect(() => {
@@ -64,7 +72,14 @@ function App() {
         updateSavedMovies(newSavedMovies);
       })
 
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: e,
+        });
+        console.log(e);
+      });
   };
 
   const handleDeleteMovie = (movie) => {
@@ -86,7 +101,14 @@ function App() {
         });
         setSavedMovies(newMoviesList);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: e,
+        });
+        console.log(e);
+      });
   };
 
   const handleUpdateProfile = ({ name, email }) => {
@@ -94,11 +116,25 @@ function App() {
       .then((data) => {
         setCurrentUser(data);
         setProfileUpdateErrorText('');
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: true,
+          text: 'Ваши данные успешно обновлены!',
+        });
       })
       .catch((e) => {
         setProfileUpdateErrorText(e);
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: e,
+        });
       });
   };
+
+  function closeInfoTooltip() {
+    setIsInfoTooltip({ ...isInfoTooltip, isOpen: false });
+  }
 
   // Auth
 
@@ -111,6 +147,11 @@ function App() {
       })
       .catch((e) => {
         setLoginErrorText(e);
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: e,
+        });
         console.log(e);
       })
       .finally(() => {
@@ -128,6 +169,11 @@ function App() {
       })
       .catch((e) => {
         setRegisterErrorText(e);
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: e,
+        });
         console.log(e);
       })
       .finally(() => {
@@ -238,6 +284,7 @@ function App() {
             <Route path={path} element={<Footer />} key={i} />
           ))}
         </Routes>
+        <InfoTooltip status={isInfoTooltip} onClose={closeInfoTooltip} />
       </div>
     </CurrentUserContext.Provider>
   );
