@@ -221,7 +221,9 @@ function App() {
           <Route
             path='/sign-in'
             element={
-              <Login
+              <ProtectedRoute
+                loggedIn={!loggedIn}
+                element={Login}
                 onLogin={handleLogin}
                 errorText={loginErrorText}
                 isDataLoad={isDataLoad}
@@ -231,7 +233,9 @@ function App() {
           <Route
             path='/sign-up'
             element={
-              <Register
+              <ProtectedRoute
+                loggedIn={!loggedIn}
+                element={Register}
                 onRegister={handleRegister}
                 errorText={registerErrorText}
                 isDataLoad={isDataLoad}
