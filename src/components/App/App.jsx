@@ -32,7 +32,7 @@ function App() {
   const navigate = useNavigate();
 
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [registerErrorText, setRegisterErrorText] = useState({});
   const [loginErrorText, setLoginErrorText] = useState({});
   const [savedMoviesErrorText, setSavedMoviesErrorText] = useState(false);
@@ -76,7 +76,7 @@ function App() {
         setIsInfoTooltip({
           isOpen: true,
           successful: false,
-          text: e,
+          text: e.message,
         });
         console.log(e);
       });
@@ -105,7 +105,7 @@ function App() {
         setIsInfoTooltip({
           isOpen: true,
           successful: false,
-          text: e,
+          text: e.message,
         });
         console.log(e);
       });
@@ -123,11 +123,12 @@ function App() {
         });
       })
       .catch((e) => {
+        console.log(e);
         setProfileUpdateErrorText(e);
         setIsInfoTooltip({
           isOpen: true,
           successful: false,
-          text: e,
+          text: e.message,
         });
       });
   };
@@ -150,7 +151,7 @@ function App() {
         setIsInfoTooltip({
           isOpen: true,
           successful: false,
-          text: e,
+          text: e.message,
         });
         console.log(e);
       })
@@ -172,7 +173,7 @@ function App() {
         setIsInfoTooltip({
           isOpen: true,
           successful: false,
-          text: e,
+          text: e.message,
         });
         console.log(e);
       })
