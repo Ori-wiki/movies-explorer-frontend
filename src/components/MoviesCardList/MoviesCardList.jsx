@@ -2,28 +2,49 @@ import React from 'react';
 
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import imageMovies from '../../images/movies/pic__COLOR_pic.jpg';
 
-function MoviesCardList({ cards, savedMoviesPage = false }) {
-  const movie = {
-    image: imageMovies,
-    name: 'В погоне за Бенкси',
-    duration: 123,
+function MoviesCardList({
+  moviesCards = [],
+  savedMoviesPage = false,
+  count,
+  shortMoviesCards,
+  onSave = false,
+  onDelete = false,
+  savedMovies = [],
+}) {
+  const getSavedCard = (savedMovies, card) => {
+    return savedMovies.find((savedMovie) => savedMovie.id === card.id);
   };
 
   return (
     <section className='movies-card-list'>
-      {cards.map((card) => (
-        <MoviesCard card={card} savedMoviesPage={savedMoviesPage} />
-      ))}
+      {shortMoviesCards.length !== 0
+        ? shortMoviesCards
+            .slice(0, count)
+            .map((card) => (
+              <MoviesCard
+                card={card}
+                savedMoviesPage={savedMoviesPage}
+                key={card.id}
+                onSave={onSave}
+                onDelete={onDelete}
+                saved={getSavedCard(savedMovies, card)}
+              />
+            ))
+        : moviesCards
+            .slice(0, count)
+            .map((card) => (
+              <MoviesCard
+                card={card}
+                savedMoviesPage={savedMoviesPage}
+                key={card.id}
+                onSave={onSave}
+                onDelete={onDelete}
+                saved={getSavedCard(savedMovies, card)}
+              />
+            ))}
     </section>
   );
 }
 
 export default MoviesCardList;
-
-/* <MoviesCard
-        movie={movie}
-        saved={true}
-        savedMoviesPage={savedMoviesPage}
-      /> */

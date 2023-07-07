@@ -1,3 +1,5 @@
+import { SHORTMOVIES_DURATION } from "./constants";
+
 function endingOfNum(n, textForms) {
   n = Math.abs(n) % 100;
   let n1 = n % 10;
@@ -25,11 +27,27 @@ export const transformTime = (duration) => {
       'часов',
     ])} ${minutes} ${endingOfNum(minutes, ['минута', 'минуты', 'минут'])}`;
   }
-}
+};
 
 export const checkResponse = (res) => {
   if (res.ok) {
     return res.json(); //если да, то возвращает полученные данные
   }
   return Promise.reject(`Error: ${res.status}`); //иначе возвращает ошибку
+};
+
+export const filterMovies = (movies, query) => {
+  const moviesQuery = movies.filter((movie) => {
+    const movieRu = String(movie.nameRU).toLowerCase().trim();
+    const movieEn = String(movie.nameEN).toLowerCase().trim();
+    const userMovie = query.toLowerCase().trim();
+    return (
+      movieRu.indexOf(userMovie) !== -1 || movieEn.indexOf(userMovie) !== -1
+    );
+  });
+  return moviesQuery;
+};
+
+export const filterShortMovies = (movies) => {
+  return movies.filter((movie) => movie.duration < SHORTMOVIES_DURATION);
 };

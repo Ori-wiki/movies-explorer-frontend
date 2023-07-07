@@ -39,6 +39,11 @@
     z-index: 11;
     display: flex;
   }
+  .header__label:has(.header__checkbox:checked) {
+    position: fixed;
+    top: 25px;
+    right: 30px;
+  }
   .header__label:has(.header__checkbox:checked) ~ .header__nav_enter {
     visibility: visible;
     transform: translateX(0);

@@ -6,6 +6,11 @@
   justify-items: center;
 }
 
+@media screen and (max-width: 1293px) {
+  .movies-card-list {
+    gap: 32px 21px;
+  }
+}
 @media screen and (max-width: 896px) {
   .movies-card-list {
     padding: 70px 30px 30px;

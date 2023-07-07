@@ -1,8 +1,16 @@
-#Ссылка на макет в фигме (я.диск)
+# Ссылка на макет в фигме (я.диск)
 https://disk.yandex.ru/d/JyN4jYHJ4OAFTA
 
-##Ссылка макет, по которому верстался проект https://www.figma.com/file/by3hiAnLDEYA9iSeS9f3yx/Diploma-(Copy)?type=design&node-id=36956%3A5332&t=JygXJ273KsMf4cCb-1
+## Ссылка на макет, по которому верстался проект https://www.figma.com/file/by3hiAnLDEYA9iSeS9f3yx/Diploma-(Copy)?type=design&node-id=36956%3A5332&t=JygXJ273KsMf4cCb-1
 
+# Ссылка на pull-req 3
+https://github.com/Ori-wiki/movies-explorer-frontend/pull/3
+
+# backend
+https://api.muda.nomoredomains.rocks
+# frontend
+https://muda.nomoredomains.rocks
+# Ссылка на pull-req 3
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
